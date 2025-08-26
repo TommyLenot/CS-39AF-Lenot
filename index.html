@@ -6,13 +6,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Magic 8 Ball</title>
   <style>
-    body { font-family: Arial, sans-serif; text-align: center; background:#f0f8ff; padding-top:50px; }
-    h1 { color:#333; }
-    input { padding:10px; width:300px; max-width:90vw; }
-    button { padding:10px 20px; margin-top:10px; cursor:pointer; }
-    button:disabled { opacity:.6; cursor:not-allowed; }
-    #answer { margin-top:20px; font-size:1.5em; font-weight:bold; color:darkblue; min-height:44px; }
-    #status { margin-top:10px; font-style:italic; min-height:24px; color:#333; }
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f0f8ff;
+      padding-top: 50px;
+    }
+    h1 { color: #333; }
+    input {
+      padding: 10px;
+      width: 300px;
+      max-width: 90vw;
+    }
+    button {
+      padding: 10px 20px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    #answer {
+      margin-top: 20px;
+      font-size: 1.5em;
+      font-weight: bold;
+      color: darkblue;
+      min-height: 44px; /* reserve space so layout doesn't jump */
+    }
+    #status {
+      margin-top: 10px;
+      font-style: italic;
+      min-height: 24px;
+      color: #333;
+    }
   </style>
 </head>
 <body>
@@ -20,16 +47,13 @@
   <p>Ask me a question and I shall give you an answer:</p>
   <input type="text" id="question" placeholder="Type your question here" />
   <br />
-  <button id="askBtn">Ask the Magic 8 Ball</button>
+  <button id="askBtn" onclick="shakeBall()">Ask the Magic 8 Ball</button>
 
   <div id="status"></div>
   <div id="answer"></div>
 
   <script>
-    // Small helper to await a timeout
-    const sleep = (ms) => new Promise(res => setTimeout(res, ms));
-
-    document.addEventListener("DOMContentLoaded", () => {
+    function shakeBall() {
       const answers = [
         "Yes",
         "No",
@@ -39,40 +63,33 @@
         "I am unable to give you a clear answer."
       ];
 
-      const btn = document.getElementById("askBtn");
-      const statusBox = document.getElementById("status");
       const answerBox = document.getElementById("answer");
+      const statusBox = document.getElementById("status");
+      const btn = document.getElementById("askBtn");
 
-      // Ensure there is only ONE click handler
-      btn.replaceWith(btn.cloneNode(true));
-      const btnFresh = document.getElementById("askBtn");
+      // Reset previous answer and disable the button during "shake"
+      answerBox.textContent = "";
+      btn.disabled = true;
 
-      btnFresh.addEventListener("click", async (e) => {
-        e.preventDefault();                 // prevent any default form behavior
-        btnFresh.disabled = true;
-        answerBox.textContent = "";         // clear previous answer
+      // Show an animated "magic is happening" status
+      let dots = 0;
+      statusBox.textContent = "🔮 The magic is happening";
+      const intervalId = setInterval(() => {
+        dots = (dots + 1) % 4; // 0..3
+        statusBox.textContent = "🔮 The magic is happening" + ".".repeat(dots);
+      }, 400);
 
-        // animated status "..."
-        let dots = 0;
-        statusBox.textContent = "🔮 The magic is happening";
-        const intervalId = setInterval(() => {
-          dots = (dots + 1) % 4;
-          statusBox.textContent = "🔮 The magic is happening" + ".".repeat(dots);
-        }, 400);
-
-        // wait 5 seconds
-        await sleep(5000);
-
+      // Wait 5 seconds, then reveal the answer
+      setTimeout(() => {
         clearInterval(intervalId);
-        statusBox.textContent = "";
+        statusBox.textContent = ""; // clear the status
 
-        // choose and show answer
         const idx = Math.floor(Math.random() * answers.length);
         answerBox.textContent = answers[idx];
 
-        btnFresh.disabled = false;
-      }, { once: false });
-    });
+        btn.disabled = false; // re-enable button
+      }, 5000); // 5000 ms = 5 seconds
+    }
   </script>
 </body>
 </html>
