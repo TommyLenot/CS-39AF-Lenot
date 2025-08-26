@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="author" content="Tommy Lenot">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="author" content="Tommy Lenot" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Magic 8 Ball</title>
   <style>
     body {
@@ -12,33 +12,44 @@
       background-color: #f0f8ff;
       padding-top: 50px;
     }
-    h1 {
-      color: #333;
-    }
+    h1 { color: #333; }
     input {
       padding: 10px;
       width: 300px;
+      max-width: 90vw;
     }
     button {
       padding: 10px 20px;
       margin-top: 10px;
       cursor: pointer;
     }
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
     #answer {
       margin-top: 20px;
       font-size: 1.5em;
       font-weight: bold;
       color: darkblue;
-      min-height: 40px; /* keeps space reserved */
+      min-height: 44px; /* reserve space so layout doesn't jump */
+    }
+    #status {
+      margin-top: 10px;
+      font-style: italic;
+      min-height: 24px;
+      color: #333;
     }
   </style>
 </head>
 <body>
   <h1>🎱 Magic 8 Ball</h1>
   <p>Ask me a question and I shall give you an answer:</p>
-  <input type="text" id="question" placeholder="Type your question here">
-  <br>
-  <button onclick="shakeBall()">Ask the Magic 8 Ball</button>
+  <input type="text" id="question" placeholder="Type your question here" />
+  <br />
+  <button id="askBtn" onclick="shakeBall()">Ask the Magic 8 Ball</button>
+
+  <div id="status"></div>
   <div id="answer"></div>
 
   <script>
@@ -53,16 +64,31 @@
       ];
 
       const answerBox = document.getElementById("answer");
+      const statusBox = document.getElementById("status");
+      const btn = document.getElementById("askBtn");
 
-      // Step 1: Show "thinking" message right away
-      answerBox.textContent = "🔮 The magic is happening... shaking the ball...";
+      // Reset previous answer and disable the button during "shake"
+      answerBox.textContent = "";
+      btn.disabled = true;
 
-      // Step 2: Wait 2 seconds, then show random answer
+      // Show an animated "magic is happening" status
+      let dots = 0;
+      statusBox.textContent = "🔮 The magic is happening";
+      const intervalId = setInterval(() => {
+        dots = (dots + 1) % 4; // 0..3
+        statusBox.textContent = "🔮 The magic is happening" + ".".repeat(dots);
+      }, 400);
+
+      // Wait 5 seconds, then reveal the answer
       setTimeout(() => {
-        const randomIndex = Math.floor(Math.random() * answers.length);
-        const answer = answers[randomIndex];
-        answerBox.textContent = answer;
-      }, 2000); // 2000 milliseconds = 2 seconds
+        clearInterval(intervalId);
+        statusBox.textContent = ""; // clear the status
+
+        const idx = Math.floor(Math.random() * answers.length);
+        answerBox.textContent = answers[idx];
+
+        btn.disabled = false; // re-enable button
+      }, 5000); // 5000 ms = 5 seconds
     }
   </script>
 </body>
