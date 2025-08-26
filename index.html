@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,6 +29,7 @@
       font-size: 1.5em;
       font-weight: bold;
       color: darkblue;
+      min-height: 40px; /* keeps space reserved */
     }
   </style>
 </head>
@@ -52,14 +52,18 @@
         "I am unable to give you a clear answer."
       ];
 
-      // Pick random answer
-      const randomIndex = Math.floor(Math.random() * answers.length);
-      const answer = answers[randomIndex];
+      const answerBox = document.getElementById("answer");
 
-      // Show answer
-      document.getElementById("answer").textContent = answer;
+      // Step 1: Show "thinking" message right away
+      answerBox.textContent = "🔮 The magic is happening... shaking the ball...";
+
+      // Step 2: Wait 2 seconds, then show random answer
+      setTimeout(() => {
+        const randomIndex = Math.floor(Math.random() * answers.length);
+        const answer = answers[randomIndex];
+        answerBox.textContent = answer;
+      }, 2000); // 2000 milliseconds = 2 seconds
     }
   </script>
 </body>
 </html>
-
