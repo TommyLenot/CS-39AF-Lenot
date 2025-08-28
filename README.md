@@ -1,7 +1,7 @@
                                                         Overview
 This is a Single Page Application (SPA) that simulates a Magic 8 Ball. The user types a question, clicks a button, waits while the “magic is happening,” and then receives a random response—all without any page reloads. 
 
-                                                  Architecture & Technical Choices
+                                            Architecture & Technical Choices
 •	SPA Model: One HTML document loaded once; all interaction happens by DOM updates (no navigation, no backend).
 •	Language/Stack:
 o	HTML for structure
