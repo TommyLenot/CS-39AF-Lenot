@@ -1,111 +1,346 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="author" content="Tommy Lenot" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Magic 8 Ball</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Grimdark Roguelite · Text RPG (SPA)</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #f0f8ff;
-      padding-top: 50px;
+    :root{
+      --bg:#0b0f14; --panel:#111723; --ink:#e7eef8; --muted:#93a6bf; --accent:#7fb3ff; --good:#4ad69d; --bad:#ff6b6b; --amber:#ffcc66;
+      --radius:18px; --shadow:0 12px 40px rgba(0,0,0,.35);
     }
-    h1 { color: #333; }
-    input {
-      padding: 10px;
-      width: 300px;
-      max-width: 90vw;
-    }
-    button {
-      padding: 10px 20px;
-      margin-top: 10px;
-      cursor: pointer;
-    }
-    button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-    #answer {
-      margin-top: 20px;
-      font-size: 1.5em;
-      font-weight: bold;
-      color: darkblue;
-      min-height: 44px; /* reserve space so layout doesn't jump */
-    }
-    #status {
-      margin-top: 10px;
-      font-style: italic;
-      min-height: 24px;
-      color: #333;
-    }
-    footer {
-      margin-top: 40px;
-      font-size: 0.95rem;
-    }
-    footer a {
-      text-decoration: none;
-    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0; font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; color:var(--ink); background:radial-gradient(1200px 900px at 80% -20%, #1a2331 0%, transparent 70%), var(--bg)}
+    header{position:sticky; top:0; z-index:10; backdrop-filter:saturate(140%) blur(8px); background:linear-gradient(180deg, rgba(12,16,22,.85), rgba(12,16,22,.6)); border-bottom:1px solid rgba(255,255,255,.06)}
+    .wrap{max-width:980px; margin:0 auto; padding:14px 18px}
+    nav{display:flex; align-items:center; gap:10px}
+    .brand{font-weight:800; letter-spacing:.2px; margin-right:auto}
+    a.pill{display:inline-flex; align-items:center; gap:.5rem; text-decoration:none; color:var(--ink); border:1px solid rgba(255,255,255,.08); padding:8px 14px; border-radius:999px; background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03)); transition:transform .12s ease, border-color .2s ease}
+    a.pill[aria-current="page"], a.pill:hover{border-color:rgba(255,255,255,.22)}
+
+    main{min-height:calc(100vh - 68px)}
+    .route{display:none; animation:fade .22s ease both}
+    .route.active{display:block}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.06); border-radius:var(--radius); box-shadow:var(--shadow); padding:22px; margin-block:18px}
+    h1{font-size:clamp(26px,4vw,38px); margin:6px 0}
+    h2{font-size:clamp(20px,2.6vw,26px); margin:10px 0}
+    p.lead{color:var(--muted); max-width:70ch}
+
+    .grid{display:grid; gap:16px; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr))}
+
+    .ui{display:grid; gap:12px}
+    .row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+    .btn{cursor:pointer; border:1px solid rgba(255,255,255,.12); background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); color:var(--ink); padding:10px 14px; border-radius:12px; font-weight:600}
+    .btn:hover{border-color:rgba(255,255,255,.25)}
+    .chip{display:inline-flex; align-items:center; gap:8px; padding:7px 10px; border-radius:999px; background:#0f1623; border:1px solid rgba(255,255,255,.08); color:var(--muted); font-size:14px}
+
+    .log{background:#0c131e; border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:12px; min-height:220px; max-height:380px; overflow:auto; font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace}
+    .log p{margin:.4rem 0}
+    .good{color:var(--good)}
+    .bad{color:var(--bad)}
+    .amber{color:var(--amber)}
+
+    footer{color:#97a6bb; font-size:13px; padding:30px 18px; text-align:center; opacity:.85}
+
+    @keyframes fade{from{opacity:0; transform:translateY(4px)} to{opacity:1; transform:none}}
   </style>
 </head>
 <body>
-  <h1>🎱 Magic 8 Ball</h1>
-  <p>Ask me a question and I shall give you an answer:</p>
-  <input type="text" id="question" placeholder="Type your question here" />
-  <br />
-  <button id="askBtn" onclick="shakeBall()">Ask the Magic 8 Ball</button>
+  <header>
+    <div class="wrap">
+      <nav>
+        <div class="brand">⚔️ Grimdark Roguelite (Text RPG)</div>
+        <a class="pill" href="#/" data-link>Home</a>
+        <a class="pill" href="#/game" data-link>Game</a>
+        <a class="pill" href="#/codex" data-link>Codex</a>
+      </nav>
+    </div>
+  </header>
 
-  <div id="status"></div>
-  <div id="answer"></div>
+  <main class="wrap" id="app" tabindex="-1">
+    <!-- Home -->
+    <section class="route" data-route="/">
+      <div class="card">
+        <h1>Text Roguelite in a grimdark far future</h1>
+        <p class="lead">Choose an archetype, face random encounters, roll d20 for actions, and push as far as you can. Single-file SPA, no backend. Scores and unlocks save locally.</p>
+        <p><a class="pill" href="#/game">▶ New Run</a></p>
+      </div>
+      <div class="grid">
+        <div class="card"><h2>What this is</h2><p>Minimal roguelite loop: explore → encounter → resolve (skill check or combat) → loot → advance. Death resets the run but keeps unlocks.</p></div>
+        <div class="card"><h2>Dice & checks</h2><p>Roll <code>d20 + skill</code> vs a DC. 20 is a crit (strong effect); 1 is a fumble (bad twist).</p></div>
+      </div>
+    </section>
 
-  <!-- Explicit link to the SPA project repository -->
-  <hr>
-  <footer>
-    <strong>Source code:</strong>
-    <a href="https://github.com/TommyLenot/CS-39AF-Lenot" target="_blank" rel="noopener">
-      View the SPA repository on GitHub
-    </a>
-  </footer>
+    <!-- Game -->
+    <section class="route" data-route="/game">
+      <div class="card">
+        <h1>New Run</h1>
+        <div class="ui" id="newRun">
+          <div class="row">
+            <label>Archetype:
+              <select id="arch">
+                <option value="guardsman">Imperial Guardsman (balanced)</option>
+                <option value="scout">Space Marine Scout (melee)</option>
+                <option value="sister">Sister Novice (resolve)</option>
+                <option value="tech">Tech-Acolyte (tinker)</option>
+              </select>
+            </label>
+            <label>Difficulty:
+              <select id="diff">
+                <option value="normal">Normal</option>
+                <option value="hard">Hard</option>
+              </select>
+            </label>
+            <label>Seed: <input id="seed" placeholder="(optional)" /></label>
+            <button class="btn" id="startBtn">Start</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h2>Status</h2>
+          <div class="row">
+            <span class="chip">HP: <strong id="hp">-</strong></span>
+            <span class="chip">Armor: <strong id="armor">-</strong></span>
+            <span class="chip">Medkits: <strong id="kits">-</strong></span>
+            <span class="chip">Grenades: <strong id="nades">-</strong></span>
+            <span class="chip">Room: <strong id="room">-</strong></span>
+            <span class="chip">Best: <strong id="best">0</strong></span>
+          </div>
+        </div>
+        <div class="card">
+          <h2>Encounter</h2>
+          <div class="log" id="log" aria-live="polite"></div>
+          <div class="row" id="actions"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Codex -->
+    <section class="route" data-route="/codex">
+      <div class="card">
+        <h1>Codex</h1>
+        <p class="lead">Archetypes and skills</p>
+        <ul>
+          <li><strong>Guardsman</strong> — HP 24, Armor 1, skills: Melee +1, Shoot +2, Resolve +0, Tinker +1.</li>
+          <li><strong>Scout Marine</strong> — HP 30, Armor 2, skills: Melee +3, Shoot +1, Resolve +1, Tinker -1.</li>
+          <li><strong>Sister Novice</strong> — HP 26, Armor 1, skills: Melee +1, Shoot +1, Resolve +3, Tinker +0.</li>
+          <li><strong>Tech-Acolyte</strong> — HP 22, Armor 1, skills: Melee +0, Shoot +1, Resolve +0, Tinker +3.</li>
+        </ul>
+        <p>Checks: <code>d20 + skill ≥ DC</code>. Combat: roll to hit vs enemy DEF; damage uses simple dice.</p>
+      </div>
+    </section>
+
+    <!-- 404 -->
+    <section class="route" data-route="/404">
+      <div class="card"><h1>Not found</h1><p class="lead">Try Home or Game.</p></div>
+    </section>
+  </main>
+
+  <footer>Built with ❤️ using just HTML, CSS, and JavaScript. Names/lore are nods to a popular grimdark setting; this is a fan-made prototype.</footer>
 
   <script>
-    function shakeBall() {
-      const answers = [
-        "Yes",
-        "No",
-        "Maybe",
-        "Unclear",
-        "Shake again",
-        "I am unable to give you a clear answer."
-      ];
+  'use strict';
+  // ----------------- Router -----------------
+  const routes = Array.from(document.querySelectorAll('.route'));
+  const navLinks = Array.from(document.querySelectorAll('a[data-link]'));
+  const app = document.getElementById('app');
+  function setActiveLink(route){ navLinks.forEach(a=>{ const target=new URL(a.href).hash.slice(1)||'/'; a.setAttribute('aria-current', target===route?'page':'false'); }); }
+  function showRoute(route){ let found=false; routes.forEach(el=>{ const match=el.dataset.route===route; el.classList.toggle('active',match); if(match) found=true; }); if(!found){ route='/404'; routes.forEach(el=>el.classList.toggle('active', el.dataset.route===route)); } setActiveLink(route); app.focus({preventScroll:true}); if(route==='/game'){ UI.syncStats(); UI.setBest(Store.best()); } }
+  function getHash(){ const raw=location.hash.slice(1); return raw&&raw.startsWith('/')?raw:'/'; }
+  addEventListener('hashchange',()=>showRoute(getHash())); addEventListener('load',()=>showRoute(getHash()));
 
-      const answerBox = document.getElementById("answer");
-      const statusBox = document.getElementById("status");
-      const btn = document.getElementById("askBtn");
+  // ----------------- Utilities -----------------
+  const RNG = (()=>{
+    let s = 0x2F6E2B1; // default seed
+    function seed(x){ s = x>>>0 || (Math.random()*1e9)|0; }
+    function next(){ // xorshift32
+      s ^= s << 13; s ^= s >>> 17; s ^= s << 5; return (s>>>0)/4294967296; }
+    function rollDie(sides){ return (next()*sides|0)+1; }
+    function roll(expr){ // e.g. "1d8+2"
+      const m = /^(\d+)d(\d+)([+-]\d+)?$/.exec(expr.trim());
+      if(!m) return 0; const n=+m[1], d=+m[2], k=m[3]?+m[3]:0; let t=0; for(let i=0;i<n;i++) t+=rollDie(d); return t+k; }
+    return { seed, next, rollDie, roll };
+  })();
 
-      // Reset previous answer and disable the button during "shake"
-      answerBox.textContent = "";
-      btn.disabled = true;
+  function clamp(x,a,b){ return Math.max(a, Math.min(b,x)); }
 
-      // Show an animated "magic is happening" status
-      let dots = 0;
-      statusBox.textContent = "🔮 The magic is happening";
-      const intervalId = setInterval(() => {
-        dots = (dots + 1) % 4; // 0..3
-        statusBox.textContent = "🔮 The magic is happening" + ".".repeat(dots);
-      }, 400);
+  // ----------------- Data -----------------
+  const ARCHETYPES = {
+    guardsman:{ name:'Imperial Guardsman', hp:24, armor:1, skills:{melee:1, shoot:2, resolve:0, tinker:1}, kits:1, nades:1 },
+    scout:{ name:'Space Marine Scout', hp:30, armor:2, skills:{melee:3, shoot:1, resolve:1, tinker:-1}, kits:1, nades:0 },
+    sister:{ name:'Sister Novice', hp:26, armor:1, skills:{melee:1, shoot:1, resolve:3, tinker:0}, kits:2, nades:0 },
+    tech:{ name:'Tech-Acolyte', hp:22, armor:1, skills:{melee:0, shoot:1, resolve:0, tinker:3}, kits:1, nades:1 },
+  };
 
-      // Wait 5 seconds, then reveal the answer
-      setTimeout(() => {
-        clearInterval(intervalId);
-        statusBox.textContent = ""; // clear the status
+  const ENEMIES = [
+    { id:'cultist', name:'Heretic Cultist', hp:14, atk:3, def:11, dmg:'1d6+1' },
+    { id:'ork', name:'Ork Boy', hp:22, atk:4, def:12, dmg:'1d8' },
+    { id:'stealer', name:'Genestealer', hp:18, atk:6, def:13, dmg:'1d6+2', crit:19 },
+    { id:'tr8r', name:'Traitor Astartes', hp:30, atk:6, def:14, dmg:'1d8+2' },
+  ];
 
-        const idx = Math.floor(Math.random() * answers.length);
-        answerBox.textContent = answers[idx];
+  const BOSSES = [
+    { id:'champ', name:'Chaos Champion', hp:36, atk:7, def:15, dmg:'1d8+3' },
+    { id:'tyranid', name:'Tyranid Warrior', hp:34, atk:7, def:14, dmg:'1d10+1' },
+  ];
 
-        btn.disabled = false; // re-enable button
-      }, 5000); // 5000 ms = 5 seconds
+  // ----------------- Store (scores/unlocks) -----------------
+  const Store = {
+    key:'grimRogue_scores_v1',
+    read(){ try{return JSON.parse(localStorage.getItem(this.key))||{best:0,runs:0,unlocks:{}};}catch{return {best:0,runs:0,unlocks:{}};} },
+    write(v){ localStorage.setItem(this.key, JSON.stringify(v)); },
+    best(){ return this.read().best||0; },
+    setBest(n){ const d=this.read(); d.best=Math.max(d.best||0,n); this.write(d); },
+    addRun(){ const d=this.read(); d.runs=(d.runs||0)+1; this.write(d); }
+  };
+
+  // ----------------- UI Helpers -----------------
+  const UI = (()=>{
+    const hp=document.getElementById('hp'), armor=document.getElementById('armor'), kits=document.getElementById('kits'), nades=document.getElementById('nades'), room=document.getElementById('room'), log=document.getElementById('log'), actions=document.getElementById('actions'), best=document.getElementById('best');
+    function clearActions(){ actions.innerHTML=''; }
+    function addAction(label, on){ const b=document.createElement('button'); b.className='btn'; b.textContent=label; b.addEventListener('click', on); actions.appendChild(b); return b; }
+    function write(html){ const p=document.createElement('p'); p.innerHTML=html; log.appendChild(p); log.scrollTop=log.scrollHeight; }
+    function resetLog(){ log.innerHTML=''; }
+    function syncStats(){ if(!Game.state) return; const s=Game.state; hp.textContent=`${s.hp}/${s.maxHp}`; armor.textContent=s.armor; kits.textContent=s.kits; nades.textContent=s.nades; room.textContent=s.room; }
+    function setBest(n){ best.textContent=n; }
+    return { clearActions, addAction, write, resetLog, syncStats, setBest };
+  })();
+
+  // ----------------- Game Core -----------------
+  const Game = {
+    state:null,
+    start(archKey, diff, seed){
+      RNG.seed(seed? hashString(seed): 0);
+      const a = ARCHETYPES[archKey]||ARCHETYPES.guardsman;
+      const d = { name:a.name, maxHp:a.hp, hp:a.hp, armor:a.armor, kits:a.kits, nades:a.nades, skills:{...a.skills}, room:1, dead:false, diff }; 
+      this.state = d;
+      UI.resetLog();
+      UI.write(`<span class="amber">You are a ${a.name}. Mission: purge the heretic.</span>`);
+      UI.syncStats();
+      this.nextEncounter();
+    },
+    nextEncounter(){
+      const s=this.state; if(s.dead) return;
+      UI.clearActions();
+      // Boss every 8th room
+      if(s.room>0 && s.room%8===0){
+        const boss = pick(BOSSES);
+        combatStart(boss, true);
+        return;
+      }
+      const r = RNG.next();
+      if(r<0.55){ // skirmish
+        const foe = pick(ENEMIES);
+        combatStart(foe, false);
+      } else if(r<0.8){ // skill event
+        skillEvent();
+      } else { // rest/loot
+        campfire();
+      }
+    },
+    endEncounter(){
+      const s=this.state; s.room++; UI.syncStats();
+      if(!s.dead) this.nextEncounter();
+    },
+    die(){
+      const s=this.state; if(!s || s.dead) return; s.dead=true; Store.setBest(Math.max(Store.best(), s.room-1)); Store.addRun();
+      UI.clearActions();
+      UI.write(`<span class="bad">You fall in room ${s.room}. The run ends.</span>`);
+      UI.addAction('New Run', ()=>location.hash = '#/game');
+      UI.setBest(Store.best());
     }
+  };
+
+  // ---------- Encounter: Combat ----------
+  function combatStart(template, boss=false){
+    const foe = JSON.parse(JSON.stringify(template));
+    const s = Game.state;
+    UI.write(`<strong>${boss? 'BOSS: ':''}${foe.name}</strong> appears. (HP ${foe.hp}, DEF ${foe.def})`);
+    UI.clearActions();
+    const turn = () => {
+      UI.clearActions();
+      UI.addAction('Shoot', ()=> playerAttack('shoot', foe, turn));
+      UI.addAction('Strike', ()=> playerAttack('melee', foe, turn));
+      if(s.nades>0) UI.addAction('Grenade', ()=>{ s.nades--; const dmg = RNG.roll('2d6'); foe.hp -= dmg; UI.write(`<span class="good">You throw a grenade for ${dmg}!</span> Foe HP ${Math.max(foe.hp,0)}`); enemyTurn(); });
+      if(s.kits>0) UI.addAction('Medkit', ()=>{ s.kits--; const heal = 8; s.hp = clamp(s.hp+heal, 0, s.maxHp); UI.write(`<span class="good">You patch wounds (+${heal}).</span>`); UI.syncStats(); enemyTurn(); });
+      UI.addAction('Pray (Resolve)', ()=>{ const ro = skillCheck('resolve', 12); if(ro.ok){ const heal= RNG.roll('1d6+2'); s.hp=clamp(s.hp+heal,0,s.maxHp); UI.write(`<span class="good">A moment of faith restores ${heal} HP.</span>`);} else { UI.write(`<span class="bad">Your voice falters. No aid comes.</span>`);} UI.syncStats(); enemyTurn(); });
+      UI.addAction('Tinker (Shield)', ()=>{ const ro = skillCheck('tinker', 12); if(ro.ok){ s.armor+=1; UI.write(`<span class="good">You jury-rig extra plating (+1 Armor this fight).</span>`);} else { UI.write(`<span class='bad'>Tools jam; no effect.</span>`);} UI.syncStats(); enemyTurn(); });
+    };
+
+    function playerAttack(kind, foe, next){
+      const s=Game.state; const mod = s.skills[kind]; const tag = kind==='shoot'? 'bolt fire':'chainsword';
+      const roll = RNG.rollDie(20); const total=roll+mod;
+      if(roll===20){ const dmg= RNG.roll('1d8+2')+mod; foe.hp-=dmg; UI.write(`<span class='good'>CRIT! Your ${tag} tears for ${dmg}. Foe HP ${Math.max(foe.hp,0)}</span>`); }
+      else if(roll===1){ UI.write(`<span class='bad'>You stumble; the attack goes wide.</span>`); }
+      else if(total>=foe.def){ const dmg= RNG.roll('1d8+1'); foe.hp-=dmg; UI.write(`<span class='good'>Hit for ${dmg}. Foe HP ${Math.max(foe.hp,0)}</span>`); }
+      else { UI.write(`Miss (rolled ${roll}+${mod} vs DEF ${foe.def}).`); }
+      if(foe.hp<=0){
+        UI.write(`<strong class='good'>${foe.name} is destroyed.</strong>`);
+        loot();
+        Game.endEncounter();
+      } else {
+        enemyTurn();
+      }
+    }
+
+    function enemyTurn(){
+      const s=Game.state; if(s.dead) return;
+      const r = RNG.rollDie(20); const bonus = foe.atk; const total=r+bonus; const target = 10 + s.armor + (Game.state.diff==='hard'?1:0);
+      if(foe.crit && r>=foe.crit){ const dmg = RNG.roll(foe.dmg)*2; s.hp -= dmg; UI.write(`<span class='bad'>${foe.name} CRITS for ${dmg}!</span>`); }
+      else if(total>=target){ const dmg = RNG.roll(foe.dmg); s.hp -= dmg; UI.write(`<span class='bad'>${foe.name} hits for ${dmg} (rolled ${r}+${bonus} vs AC ${target}).</span>`); }
+      else { UI.write(`${foe.name} misses (rolled ${r}+${bonus}).`); }
+      if(s.hp<=0){ UI.syncStats(); Game.die(); return; }
+      UI.syncStats();
+      turn();
+    }
+
+    turn();
+  }
+
+  // ---------- Encounter: Skill ----------
+  function skillEvent(){
+    const s=Game.state; const events=[
+      {name:'Sealed Bulkhead', skill:'tinker', dc:[10,13], ok:'You bypass the lock and salvage a stim (medkit +1).', fail:'Alarm screeches; you take 3 damage while rushing.', effect:(ok)=>{ if(ok) s.kits++; else s.hp-=3; }},
+      {name:'Rally the Scattered', skill:'resolve', dc:[10,14], ok:'Your words steel hearts (+4 HP).', fail:'Fear gnaws at you (-2 HP).', effect:(ok)=>{ s.hp=clamp(s.hp+(ok?4:-2),0,s.maxHp); }},
+      {name:'Silent Ambush', skill:'shoot', dc:[11,14], ok:'You drop the sentry from cover (gain a grenade).', fail:'You are spotted (take 3 damage).', effect:(ok)=>{ if(ok) s.nades++; else s.hp-=3; }},
+      {name:'Close Quarters', skill:'melee', dc:[11,15], ok:'A single decisive strike (+1 Armor this run).', fail:'You overextend (-3 HP).', effect:(ok)=>{ if(ok) s.armor++; else s.hp-=3; }},
+    ];
+    const ev = pick(events);
+    UI.write(`<em>${ev.name}</em> — test your <strong>${ev.skill}</strong>.`);
+    const ro = skillCheck(ev.skill, pick(ev.dc));
+    if(ro.crit){ UI.write(`<span class='good'>Critical success (rolled 20)! ${ev.ok}</span>`); ev.effect(true); }
+    else if(ro.ok){ UI.write(`<span class='good'>Success (roll ${ro.roll}+${ro.mod} ≥ ${ro.dc}). ${ev.ok}</span>`); ev.effect(true); }
+    else if(ro.fumble){ UI.write(`<span class='bad'>Fumble (rolled 1). ${ev.fail} And you lose a medkit.</span>`); ev.effect(false); if(s.kits>0) s.kits--; }
+    else { UI.write(`<span class='bad'>Fail (roll ${ro.roll}+${ro.mod} < ${ro.dc}). ${ev.fail}</span>`); ev.effect(false); }
+    UI.syncStats();
+    UI.clearActions(); UI.addAction('Onward', ()=>Game.endEncounter());
+  }
+
+  // ---------- Encounter: Rest ----------
+  function campfire(){
+    const s=Game.state; UI.write('A brief lull in the fighting.'); UI.clearActions();
+    UI.addAction('Rest (+6 HP)', ()=>{ s.hp = clamp(s.hp+6,0,s.maxHp); UI.write('<span class="good">You patch wounds and reload.</span>'); UI.syncStats(); Game.endEncounter(); });
+    UI.addAction('Scavenge (d20)', ()=>{ const r = RNG.rollDie(20); if(r>=15){ s.kits++; UI.write('<span class="good">You find a medkit.</span>'); } else if(r>=10){ s.nades++; UI.write('<span class="good">You find a grenade.</span>'); } else { UI.write('Nothing useful.'); } UI.syncStats(); Game.endEncounter(); });
+  }
+
+  // ---------- Mechanics ----------
+  function skillCheck(skill, dc){ const s=Game.state; const roll=RNG.rollDie(20); const mod=s.skills[skill]||0; const total=roll+mod; return { ok:total>=dc && roll!==1, crit:roll===20, fumble:roll===1, roll, mod, dc }; }
+  function loot(){
+    const s=Game.state; const r=RNG.next(); if(r<0.4){ s.kits++; UI.write('You recover a medkit.'); } else if(r<0.7){ s.nades++; UI.write('You salvage a grenade.'); } else { s.hp=clamp(s.hp+4,0,s.maxHp); UI.write('You catch your breath (+4 HP).'); } UI.syncStats(); }
+  function pick(arr){ return arr[(RNG.next()*arr.length)|0]; }
+  function hashString(str){ let h=2166136261>>>0; for(let i=0;i<str.length;i++){ h^=str.charCodeAt(i); h=(h*16777619)>>>0; } return h; }
+
+  // ----------------- New Run controls -----------------
+  document.getElementById('startBtn').addEventListener('click', ()=>{
+    const arch = document.getElementById('arch').value;
+    const diff = document.getElementById('diff').value;
+    const seed = document.getElementById('seed').value.trim();
+    Game.start(arch, diff, seed);
+  });
+
   </script>
 </body>
 </html>
