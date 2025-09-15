@@ -8,10 +8,13 @@ GitHub Repository: https://github.com/TommyLenot/CS-39AF-Lenot
 
                                             Architecture & Technical Choices
 SPA Model: One HTML document; navigation via hash routes (#/, #/game, #/hub, #/codex). Content swaps by toggling .route sections—no server.
+
 • Language / Stack
+
 	• HTML5 for structure (semantic sections)
 	• CSS3 (embedded <style>) for layout/theme
 	• Vinilla JavaScript (ES6) for router, state, RNG, combat/events
+ 
 • Routing: Hash-based (hashchange listener) sets the active view and moves focus to #app for accessibility.
 • State: Single in-memory object Game.s (HP/Armor/Will/Power, items, floor/room, XP/level, shard counts, etc.). localStorage used only for “Best Floor”.
 • No frameworks, no backend, no build tools. Pure client-side.
@@ -38,15 +41,22 @@ SPA Model: One HTML document; navigation via hash routes (#/, #/game, #/hub, #/c
 
 	                                                 Styling Decisions (CSS):
 •	Theme: Dark, high-contrast palette with subtle gradients; soft shadows, rounded cards.
+
 •	Layout: Responsive grid cards; compact status “chips”; sticky nav with translucent backdrop.
+
 •	Typography: System UI stack for clarity and performance.
+
 •	UX polish: Scrollable combat log; action buttons grouped; consistent spacing; minimal motion.
 
 													Accessibility Considerations: 
 • Semantic structure: headings, lists, descriptive button text
+
 • Color contrast: dark theme with high-contrast inks; emphasis via .good, .bad, .amber
+
 • Live region: the battle/event log uses aria-live="polite" to announce updates
+
 • Keyboard: all controls are standard buttons/links (Tab/Enter/Space work)
+
 • Focus management: router moves focus to #app after navigation for screen reader continuity
                                                         How to Use
 
