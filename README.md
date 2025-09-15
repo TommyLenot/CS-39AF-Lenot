@@ -21,7 +21,9 @@ SPA Model: One HTML document; navigation via hash routes (#/, #/game, #/hub, #/c
 
                                                       State & Logic:
 • Seedable RNG: XOR-shift variant for reproducible runs; optional seed input.
+
 • Encounters per room: Combat, Skill/Event, or Campfire.
+
 • Combat rules: d20 + POW + 2 vs enemy DEF; crit on 20. Grenades, Medkits (full heal), Pray (Will-based heal).
 
 	• From Floor 3: regular rooms can spawn two enemies.
