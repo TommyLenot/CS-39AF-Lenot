@@ -58,7 +58,8 @@ SPA Model: One HTML document; navigation via hash routes (#/, #/game, #/hub, #/c
 • Keyboard: all controls are standard buttons/links (Tab/Enter/Space work)
 
 • Focus management: router moves focus to #app after navigation for screen reader continuity
-                                                        How to Use
+
+                                                        How to Use:
 
 1. Click Game (or ▶ New Run), choose Class/Subfaction/Difficulty, optionally set a Seed.
 2. Click Start to begin.
