@@ -11,9 +11,9 @@
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0; font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; color:var(--ink); background:radial-gradient(1200px 900px at 80% -20%, #1a2331 0%, transparent 70%), var(--bg)}
+    body{margin:0; font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; color:var(--ink); background:radial-gradient(1200px 900px at 80% -20%, #1a2331 0%, transparent 70%), var(--bg)}
     header{position:sticky; top:0; z-index:10; backdrop-filter:saturate(140%) blur(8px); background:linear-gradient(180deg, rgba(12,16,22,.85), rgba(12,16,22,.6)); border-bottom:1px solid rgba(255,255,255,.06)}
-    .wrap{max-width:1040px; margin:0 auto; padding:14px 18px}
+    .wrap{max-width:1020px; margin:0 auto; padding:14px 18px}
     nav{display:flex; align-items:center; gap:10px}
     .brand{font-weight:800; letter-spacing:.2px; margin-right:auto}
     a.pill{display:inline-flex; align-items:center; gap:.5rem; text-decoration:none; color:var(--ink); border:1px solid rgba(255,255,255,.08); padding:8px 14px; border-radius:999px; background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03)); transition:transform .12s ease, border-color .2s ease}
@@ -25,7 +25,7 @@
     .card{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.06); border-radius:var(--radius); box-shadow:var(--shadow); padding:22px; margin-block:18px}
     h1{font-size:clamp(26px,4vw,38px); margin:6px 0}
     h2{font-size:clamp(20px,2.6vw,26px); margin:10px 0}
-    p.lead{color:var(--muted); max-width:80ch}
+    p.lead{color:var(--muted); max-width:75ch}
 
     .grid{display:grid; gap:16px; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr))}
 
@@ -35,7 +35,7 @@
     .btn:hover{border-color:rgba(255,255,255,.25)}
     .chip{display:inline-flex; align-items:center; gap:8px; padding:7px 10px; border-radius:999px; background:#0f1623; border:1px solid rgba(255,255,255,.08); color:var(--muted); font-size:14px}
 
-    .log{background:#0c131e; border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:12px; min-height:260px; max-height:460px; overflow:auto; font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace}
+    .log{background:#0c131e; border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:12px; min-height:240px; max-height:440px; overflow:auto; font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace}
     .log p{margin:.45rem 0}
     .good{color:var(--good)}
     .bad{color:var(--bad)}
@@ -64,12 +64,12 @@
     <section class="route" data-route="/">
       <div class="card">
         <h1>Indomitus Crusade: Tower of Abyss</h1>
-        <p class="lead">Prologue — You march with the vast hosts of the Imperium in the Indomitus Crusade upon the world of <strong>Sigra</strong>. The forces of Chaos have raised a black spire: the <strong>Tower of Abyss</strong>. You are chosen to breach its depths. Your journey begins at <strong>Angel's Watch</strong>—an Imperial stronghold where you may return to resupply with a Rogue Trader. Fight through <strong>10 floors</strong>, each guarded by a boss. Destroy the heart on Floor 10 to collapse the tower and free Sigra for the Imperium.</p>
+        <p class="lead">Prologue — You are part of a vast Imperial host waging the Indomitus Crusade on the world of <strong>Sigra</strong>. The forces of Chaos have raised a black spire, the <strong>Tower of Abyss</strong>. You are chosen to enter, strike at its heart, and return to <strong>Angel's Watch</strong>—an Imperial stronghold—to resupply. Descend to <strong>Floor 10</strong>, defeat the guardian, and collapse the tower to free Sigra for the Imperium.</p>
         <p><a class="pill" href="#/game">▶ New Run</a></p>
       </div>
       <div class="grid">
-        <div class="card"><h2>How to play</h2><p>Pick a class and chapter/order/regiment. Explore rooms (10 per floor) → face events and battles → defeat the floor boss → descend. Combat is turn-based with <em>1-in-6</em> random twists. Medkits are rare but fully heal. Armor raises AC and reduces damage. Kills award XP and Thrones (₮), scaled by floor. Return to Angel's Watch to buy supplies. Max level is 40; every 5 levels, one stat +1 at random.</p></div>
-        <div class="card"><h2>Dice</h2><p>Attacks: <code>d20 + POW + 2</code> vs DEF (crit on 20). Damage scales with <strong>Power</strong>. <strong>Will</strong> increases healing from Pray. <strong>Armor</strong> reduces incoming damage and raises your AC.</p></div>
+        <div class="card"><h2>How to play</h2><p>Pick a class and chapter/order/regiment, then push room by room. Encounters are combat, tests, or brief rests. Each combat round has a small chance for a random twist (1 in 6). Medkits are rare but fully heal. Armor reduces damage <em>and</em> raises AC. Kill foes to earn XP and Thrones (₮), scaled by floor. Return to Angel's Watch to shop. Level cap is 40; every 5 levels, gain +1 to a random stat.</p></div>
+        <div class="card"><h2>Dice</h2><p>Attacks: <code>d20 + POW + 2</code> vs DEF; crit on 20. Damage scales with <strong>Power</strong>. <strong>Will</strong> boosts Pray healing. <strong>Armor</strong> reduces incoming damage and increases AC.</p></div>
       </div>
     </section>
 
@@ -111,8 +111,7 @@
             <span class="chip">Power: <strong id="pow">-</strong></span>
             <span class="chip">Medkits: <strong id="kits">-</strong></span>
             <span class="chip">Grenades: <strong id="nades">-</strong></span>
-            <span class="chip">Floor: <strong id="floor">1</strong></span>
-            <span class="chip">Room: <strong id="room">1/10</strong></span>
+            <span class="chip">Room: <strong id="room">-</strong></span>
             <span class="chip">Lvl: <strong id="lvl">1</strong></span>
             <span class="chip">XP: <strong id="xp">0</strong></span>
             <span class="chip">₮: <strong id="money">0</strong></span>
@@ -153,7 +152,7 @@
         </div>
         <div class="card">
           <h2>Depart</h2>
-          <p>Resume your run on your current floor/room.</p>
+          <p>Resume your run at the next room you had reached.</p>
           <button class="btn" id="departBtn">Back to the Tower</button>
         </div>
       </div>
@@ -169,7 +168,7 @@
           <li><strong>Sister of Battle</strong> — HP 30, Armor 1, Will 3, Power 2. Orders: <em>Argent Shroud</em> (+2 Will), <em>Our Martyred Lady</em> (+1 Will, +1 Armor), <em>Ebon Chalice</em> (+1 Power, +5 HP).</li>
           <li><strong>Imperial Guardsman</strong> — HP 25, Armor 1, Will 2, Power 2. Regiments: <em>Cadian</em> (+1 Armor, +1 Power), <em>Catachan</em> (+2 Power), <em>Kriegsman</em> (+1 Will, +10 HP).</li>
         </ul>
-        <p>Each floor has 10 rooms, then a boss. Beat Floor 10 to finish the campaign.</p>
+        <p>Attacks: <code>d20 + POW + 2</code> vs DEF (crit on 20). Damage scales with <strong>Power</strong>. <strong>Armor</strong> reduces incoming damage and raises your AC. <strong>Will</strong> increases Pray healing. Boss on Floor 10.</p>
       </div>
     </section>
 
@@ -201,9 +200,9 @@
     function roll(expr){ const m = /^(\d+)d(\d+)([+-]\d+)?$/.exec(expr.trim()); if(!m) return 0; const n=+m[1], d=+m[2], k=m[3]?+m[3]:0; let t=0; for(let i=0;i<n;i++) t+=rollDie(d); return t+k; }
     return { seed, next, rollDie, roll };
   })();
-  const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
-  const pick=(arr)=>arr[(RNG.next()*arr.length)|0];
-  const hashString=(str)=>{ let h=2166136261>>>0; for(let i=0;i<str.length;i++){ h^=str.charCodeAt(i); h=(h*16777619)>>>0; } return h; };
+  function clamp(x,a,b){ return Math.max(a, Math.min(b,x)); }
+  function pick(arr){ return arr[(RNG.next()*arr.length)|0]; }
+  function hashString(str){ let h=2166136261>>>0; for(let i=0;i<str.length;i++){ h^=str.charCodeAt(i); h=(h*16777619)>>>0; } return h; }
 
   // ----------------- Data -----------------
   const ARCHETYPES = {
@@ -211,6 +210,7 @@
     sister:{ name:'Sister of Battle', base:{ hp:30, armor:1, will:3, pow:2, kits:2, nades:0 } },
     guard:{ name:'Imperial Guardsman', base:{ hp:25, armor:1, will:2, pow:2, kits:1, nades:1 } },
   };
+
   const SUBFACTIONS = {
     marine:[
       { id:'fists', name:'Imperial Fists', bonus:{ armor:+2 } },
@@ -228,12 +228,14 @@
       { id:'krieg', name:'Kriegsman', bonus:{ will:+1, hp:+10 } },
     ]
   };
+
   const ENEMIES = [
     { id:'cultist', name:'Heretic Cultist', hp:14, atk:3, def:10, dmg:'1d6+1' },
     { id:'ork', name:'Ork Boy', hp:22, atk:4, def:11, dmg:'1d8' },
     { id:'stealer', name:'Genestealer', hp:18, atk:6, def:12, dmg:'1d6+2', crit:19 },
     { id:'tr8r', name:'Traitor Astartes', hp:28, atk:6, def:12, dmg:'1d8+2' },
   ];
+
   const BOSSES = [
     { id:'champ', name:'Chaos Champion', hp:36, atk:7, def:13, dmg:'1d8+3' },
     { id:'tyranid', name:'Tyranid Warrior', hp:34, atk:7, def:13, dmg:'1d10+1' },
@@ -241,7 +243,7 @@
 
   // ----------------- Store (best floor) -----------------
   const Store = {
-    key:'grimRogue_bestFloor_v3',
+    key:'grimRogue_scores_v2',
     read(){ try{return JSON.parse(localStorage.getItem(this.key))||{best:0,runs:0};}catch{return {best:0,runs:0};} },
     write(v){ localStorage.setItem(this.key, JSON.stringify(v)); },
     best(){ return this.read().best||0; },
@@ -251,18 +253,17 @@
 
   // ----------------- UI Helpers -----------------
   const UI = (()=>{
-    const hp=gid('hp'), armor=gid('armor'), kits=gid('kits'), nades=gid('nades');
-    const room=gid('room'), floor=gid('floor'), log=gid('log'), actions=gid('actions');
+    const hp=gid('hp'), armor=gid('armor'), kits=gid('kits'), nades=gid('nades'), room=gid('room'), log=gid('log'), actions=gid('actions');
     const best=gid('best'), will=gid('will'), pow=gid('pow'), lvl=gid('lvl'), xp=gid('xp'), money=gid('money');
     function clearActions(){ actions.innerHTML=''; }
     function addAction(label, on){ const b=document.createElement('button'); b.className='btn'; b.textContent=label; b.addEventListener('click', on); actions.appendChild(b); return b; }
     function write(html){ const p=document.createElement('p'); p.innerHTML=html; log.appendChild(p); log.scrollTop=log.scrollHeight; }
     function resetLog(){ log.innerHTML=''; }
-    function syncStats(){ if(!Game.s) return; const s=Game.s; hp.textContent=`${s.hp}/${s.maxHp}`; armor.textContent=s.armor; kits.textContent=s.kits; nades.textContent=s.nades; floor.textContent=s.floor; room.textContent=`${s.room}/10`; will.textContent=s.will; pow.textContent=s.pow; lvl.textContent=s.lvl; xp.textContent=`${s.exp}/${xpToNext(s.lvl)}`; money.textContent=s.money; }
+    function syncStats(){ if(!Game.s) return; const s=Game.s; hp.textContent=`${s.hp}/${s.maxHp}`; armor.textContent=s.armor; kits.textContent=s.kits; nades.textContent=s.nades; room.textContent=s.room; will.textContent=s.will; pow.textContent=s.pow; lvl.textContent=s.lvl; xp.textContent=`${s.exp}/${xpToNext(s.lvl)}`; money.textContent=s.money; }
     function setBest(n){ best.textContent=n; }
     return { clearActions, addAction, write, resetLog, syncStats, setBest };
   })();
-  const gid=(id)=>document.getElementById(id);
+  function gid(id){ return document.getElementById(id); }
 
   // ----------------- Game Core -----------------
   const Game = {
@@ -274,8 +275,7 @@
       applyBonus(base, sub.bonus);
       this.s = { name:ARCHETYPES[archKey].name, sub:sub.name, diff,
         maxHp:base.hp, hp:base.hp, armor:base.armor, will:base.will, pow:base.pow,
-        kits:base.kits, nades:base.nades,
-        floor:1, room:1, dead:false,
+        kits:base.kits, nades:base.nades, room:1, dead:false,
         exp:0, lvl:1, money:0 };
       UI.resetLog();
       UI.write(`<span class="amber">You are a ${this.s.name} of the ${this.s.sub}. Mission: breach the Tower of Abyss.</span>`);
@@ -285,21 +285,41 @@
     nextEncounter(){
       const s=this.s; if(s.dead) return;
       UI.clearActions();
-      // Boss at room 10 on every floor
-      if(s.room===10){ const boss = scaleEnemy(pick(BOSSES), s.floor); combatStart(boss, true); return; }
+      // Boss at floor 10
+      if(s.room>0 && s.room%10===0){
+        const boss = pick(BOSSES);
+        combatStart(boss, true);
+        return;
+      }
       const r = RNG.next();
-      if(r<0.55){ const foe = scaleEnemy(pick(ENEMIES), s.floor); combatStart(foe, false); }
-      else if(r<0.8){ skillEvent(); }
-      else { campfire(); }
+      if(r<0.55){
+        const foe = pick(ENEMIES);
+        combatStart(foe, false);
+      } else if(r<0.8){
+        skillEvent();
+      } else {
+        campfire();
+      }
     },
-    advanceRoom(){ const s=this.s; if(s.dead) return; s.room = Math.min(10, s.room+1); UI.syncStats(); this.nextEncounter(); },
-    advanceFloor(){ const s=this.s; if(s.dead) return; const cleared=s.floor; s.floor += 1; s.room = 1; UI.write(`<strong class='good'>Floor ${cleared} cleared. Descending to Floor ${s.floor}.</strong>`); Store.setBest(Math.max(Store.best(), cleared)); UI.syncStats(); this.nextEncounter(); },
-    die(){ const s=this.s; if(!s || s.dead) return; s.dead=true; Store.setBest(Math.max(Store.best(), s.floor)); Store.addRun(); UI.clearActions(); UI.write(`<span class="bad">You fall on Floor ${s.floor}, Room ${s.room}. The run ends.</span>`); UI.addAction('New Run', ()=>location.hash = '#/game'); UI.setBest(Store.best()); },
-    victory(){ const s=this.s; s.dead=true; Store.setBest(10); UI.write(`<strong class='good'>The Floor-10 boss is slain. The Tower of Abyss collapses. Sigra is free!</strong>`); UI.clearActions(); UI.addAction('New Run', ()=>location.hash = '#/game'); }
+    endEncounter(){
+      const s=this.s; s.room++; UI.syncStats();
+      if(!s.dead) this.nextEncounter();
+    },
+    die(){
+      const s=this.s; if(!s || s.dead) return; s.dead=true; Store.setBest(Math.max(Store.best(), s.room-1)); Store.addRun();
+      UI.clearActions();
+      UI.write(`<span class="bad">You fall on room ${s.room}. The run ends.</span>`);
+      UI.addAction('New Run', ()=>location.hash = '#/game');
+      UI.setBest(Store.best());
+    },
+    victory(){
+      const s=this.s; s.dead=true; Store.setBest(Math.max(Store.best(), 10));
+      UI.write(`<strong class='good'>The floor-10 boss is slain. The Tower of Abyss collapses. Sigra is free!</strong>`);
+      UI.clearActions(); UI.addAction('New Run', ()=>location.hash = '#/game');
+    }
   };
 
   function applyBonus(base, bonus){ for(const k in bonus){ base[k] = (base[k]||0) + bonus[k]; } }
-  function scaleEnemy(tpl, floor){ const e=JSON.parse(JSON.stringify(tpl)); const mult=1+0.12*(floor-1); e.hp = Math.round(e.hp*mult); e.atk = e.atk + Math.floor((floor-1)/3); e.def = e.def + Math.floor((floor-1)/3); return e; }
 
   // ---------- Combat ----------
   function combatStart(template, boss=false){
@@ -317,45 +337,46 @@
       if(state.playerSkip){ state.playerSkip=false; return enemyTurn(); }
 
       UI.clearActions();
-      UI.addAction('Shoot', ()=> playerAttack('shoot'));
-      UI.addAction('Strike', ()=> playerAttack('melee'));
-      if(s.nades>0) UI.addAction('Grenade', ()=>{ s.nades--; const raw = RNG.roll('2d6') + Math.floor(s.pow/2); const real = Math.max(0, raw - Math.floor(foe.def/6)); foe.hp -= real; UI.write(`<span class=\"good\">Grenade explodes (${raw} → ${real}).</span> Foe HP ${Math.max(foe.hp,0)}`); enemyTurn(); });
-      if(s.kits>0) UI.addAction('Medkit (full heal)', ()=>{ s.kits--; s.hp = s.maxHp; UI.write(`<span class=\"good\">You fully heal.</span>`); UI.syncStats(); enemyTurn(); });
-      UI.addAction('Pray (Will)', ()=>{ const heal = RNG.roll('1d6') + 2 + s.will; s.hp = clamp(s.hp + heal, 0, s.maxHp); UI.write(`<span class=\"good\">Faith restores ${heal} HP.</span>`); UI.syncStats(); enemyTurn(); });
+      UI.addAction('Shoot', ()=> playerAttack('shoot', foe, turn, state));
+      UI.addAction('Strike', ()=> playerAttack('melee', foe, turn, state));
+      if(s.nades>0) UI.addAction('Grenade', ()=>{ s.nades--; const raw = RNG.roll('2d6') + Math.floor(s.pow/2); const real = Math.max(0, raw - Math.floor(foe.def/6)); foe.hp -= real; UI.write(`<span class="good">Grenade explodes (${raw} → ${real}).</span> Foe HP ${Math.max(foe.hp,0)}`); enemyTurn(); });
+      if(s.kits>0) UI.addAction('Medkit (full heal)', ()=>{ s.kits--; s.hp = s.maxHp; UI.write(`<span class="good">You fully heal.</span>`); UI.syncStats(); enemyTurn(); });
+      UI.addAction('Pray (Will)', ()=>{ const heal = RNG.roll('1d6') + 2 + s.will; s.hp = clamp(s.hp + heal, 0, s.maxHp); UI.write(`<span class="good">Faith restores ${heal} HP.</span>`); UI.syncStats(); enemyTurn(); });
       UI.addAction("Retreat to Angel's Watch", ()=>{ location.hash = '#/hub'; });
     };
 
-    function playerAttack(kind){
+    function playerAttack(kind, foe, next, state){
       const tag = kind==='shoot'? 'bolt fire':'blade';
       const d20a = RNG.rollDie(20); const d20b = RNG.rollDie(20);
       const roll = state.playerAdv ? Math.max(d20a,d20b) : d20a;
-      const mod = s.pow + 2; // increased hit chance
+      const mod = Game.s.pow + 2; // increased hit chance per feedback
       const total = roll + mod;
-      if(roll===20){ const dmg= RNG.roll('1d8+2') + s.pow; foe.hp-=dmg; UI.write(`<span class='good'>CRIT! Your ${tag} deals ${dmg}. Foe HP ${Math.max(foe.hp,0)}</span>`); }
+      if(roll===20){ const dmg= RNG.roll('1d8+2') + Game.s.pow; foe.hp-=dmg; UI.write(`<span class='good'>CRIT! Your ${tag} deals ${dmg}. Foe HP ${Math.max(foe.hp,0)}</span>`); }
       else if(roll===1){ UI.write(`<span class='bad'>Fumble—your ${tag} misses.</span>`); }
-      else if(total>=foe.def){ const dmg= RNG.roll('1d8+1') + s.pow; foe.hp-=dmg; UI.write(`<span class='good'>Hit for ${dmg}. Foe HP ${Math.max(foe.hp,0)}</span>`); }
+      else if(total>=foe.def){ const dmg= RNG.roll('1d8+1') + Math.floor(Game.s.pow/1); foe.hp-=dmg; UI.write(`<span class='good'>Hit for ${dmg}. Foe HP ${Math.max(foe.hp,0)}</span>`); }
       else { UI.write(`Miss (rolled ${roll}+${mod} vs DEF ${foe.def}).`); }
       state.playerAdv=false;
       if(foe.hp<=0){
-        const rewards = onKillRewards(s.floor, boss);
-        s.exp += rewards.xp; s.money += rewards.credits;
+        const rewards = onKillRewards(Game.s.room, boss);
+        Game.s.exp += rewards.xp; Game.s.money += rewards.credits;
         UI.write(`<span class='good'>${foe.name} falls. +${rewards.xp} XP, +₮${rewards.credits}.</span>`);
         levelCheck(); UI.syncStats();
-        if(boss){ if(s.floor>=10){ Game.victory(); return; } loot(); Game.advanceFloor(); }
-        else { loot(); Game.advanceRoom(); }
+        if(boss && Game.s.room===10){ Game.victory(); return; }
+        loot();
+        Game.endEncounter();
       } else {
         enemyTurn();
       }
     }
 
     function enemyTurn(){
-      if(s.dead) return;
+      if(Game.s.dead) return;
       if(state.enemySkip){ UI.write(`<span class='amber'>${foe.name} stumbles and loses the turn.</span>`); state.enemySkip=false; return turn(); }
-      const r = RNG.rollDie(20); const bonus = foe.atk; const total=r+bonus; const target = 10 + s.armor + (s.diff==='hard'?1:0);
-      if(foe.crit && r>=foe.crit){ let dmg = RNG.roll(foe.dmg)*2; dmg = Math.max(0, dmg - s.armor); s.hp -= dmg; UI.write(`<span class='bad'>${foe.name} CRITS for ${dmg} after armor!</span>`); }
-      else if(total>=target){ let dmg = RNG.roll(foe.dmg); dmg = Math.max(0, dmg - s.armor); s.hp -= dmg; UI.write(`<span class='bad'>${foe.name} hits for ${dmg} (rolled ${r}+${bonus} vs AC ${target}).</span>`); }
+      const r = RNG.rollDie(20); const bonus = foe.atk; const total=r+bonus; const target = 10 + Game.s.armor + (Game.s.diff==='hard'?1:0);
+      if(foe.crit && r>=foe.crit){ let dmg = RNG.roll(foe.dmg)*2; dmg = Math.max(0, dmg - Game.s.armor); Game.s.hp -= dmg; UI.write(`<span class='bad'>${foe.name} CRITS for ${dmg} after armor!</span>`); }
+      else if(total>=target){ let dmg = RNG.roll(foe.dmg); dmg = Math.max(0, dmg - Game.s.armor); Game.s.hp -= dmg; UI.write(`<span class='bad'>${foe.name} hits for ${dmg} (rolled ${r}+${bonus} vs AC ${target}).</span>`); }
       else { UI.write(`${foe.name} misses (rolled ${r}+${bonus}).`); }
-      if(s.hp<=0){ UI.syncStats(); Game.die(); return; }
+      if(Game.s.hp<=0){ UI.syncStats(); Game.die(); return; }
       UI.syncStats();
       turn();
     }
@@ -364,7 +385,7 @@
   }
 
   function randomCombatEvent(state, foe){
-    const s=Game.s; const which = RNG.rollDie(4); // 4 events
+    const s=Game.s; const which = RNG.rollDie(4); // 4 possible events
     if(which===1){ UI.write('<span class="bad">Weapon jam! You lose this action.</span>'); state.playerSkip=true; }
     else if(which===2){ const dmg = RNG.roll('1d6'); const you = Math.max(0, dmg - s.armor); const them = Math.max(0, dmg - Math.floor(foe.def/6)); s.hp -= you; foe.hp -= them; UI.write(`<span class='amber'>Warp surge! Both suffer ${dmg} raw (${you} to you after armor).</span>`); if(s.hp<=0){ UI.syncStats(); Game.die(); } }
     else if(which===3){ UI.write('<span class="good">Blessed aim—advantage on your next attack.</span>'); state.playerAdv=true; }
@@ -388,32 +409,33 @@
   // ---------- Events & Rest ----------
   function skillEvent(){
     const s=Game.s; const events=[
-      {name:'Sealed Bulkhead', stat:'pow', ok:'You smash the lock; salvage a grenade.', fail:'Alarm blares; you take 3 damage rushing.', effect:(ok)=>{ if(ok) s.nades++; else s.hp-=3; }},
-      {name:'Rally the Scattered', stat:'will', ok:'Your words steel hearts (+6 HP).', fail:'Doubt gnaws (-2 HP).', effect:(ok)=>{ s.hp=clamp(s.hp+(ok?6:-2),0,s.maxHp); }},
-      {name:'Silent Sentry', stat:'pow', ok:'You drop the sentry from cover (+₮10).', fail:'Spotted! (-3 HP).', effect:(ok)=>{ if(ok) s.money+=10; else s.hp-=3; }},
-      {name:'Close Quarters Drill', stat:'pow', ok:'Decisive strike (+1 Armor this run).', fail:'Overextend (-3 HP).', effect:(ok)=>{ if(ok) s.armor++; else s.hp-=3; }},
+      {name:'Sealed Bulkhead', skill:'pow', ok:'You smash the lock; salvage a grenade.', fail:'Alarm blares; you take 3 damage rushing.', effect:(ok)=>{ if(ok) s.nades++; else s.hp-=3; }},
+      {name:'Rally the Scattered', skill:'will', ok:'Your words steel hearts (+6 HP).', fail:'Doubt gnaws (-2 HP).', effect:(ok)=>{ s.hp=clamp(s.hp+(ok?6:-2),0,s.maxHp); }},
+      {name:'Silent Sentry', skill:'pow', ok:'You drop the sentry from cover (+₮10).', fail:'Spotted! (-3 HP).', effect:(ok)=>{ if(ok) s.money+=10; else s.hp-=3; }},
+      {name:'Close Quarters Drill', skill:'pow', ok:'Decisive strike (+1 Armor this run).', fail:'Overextend (-3 HP).', effect:(ok)=>{ if(ok) s.armor++; else s.hp-=3; }},
     ];
     const ev = pick(events);
-    UI.write(`<em>${ev.name}</em> — test your <strong>${ev.stat.toUpperCase()}</strong>.`);
-    const ro = statCheck(ev.stat, 12);
+    UI.write(`<em>${ev.name}</em> — test your <strong>${ev.skill.toUpperCase()}</strong>.`);
+    const ro = skillCheck(ev.skill, 12);
     if(ro.crit){ UI.write(`<span class='good'>Critical success (rolled 20)! ${ev.ok}</span>`); ev.effect(true); }
     else if(ro.ok){ UI.write(`<span class='good'>Success (roll ${ro.roll}+${ro.mod} ≥ ${ro.dc}). ${ev.ok}</span>`); ev.effect(true); }
     else if(ro.fumble){ UI.write(`<span class='bad'>Fumble (rolled 1). ${ev.fail} You also drop a grenade if you have one.</span>`); ev.effect(false); if(s.nades>0) s.nades--; }
     else { UI.write(`<span class='bad'>Fail (roll ${ro.roll}+${ro.mod} < ${ro.dc}). ${ev.fail}</span>`); ev.effect(false); }
     UI.syncStats();
-    UI.clearActions(); UI.addAction('Onward', ()=>Game.advanceRoom());
+    UI.clearActions(); UI.addAction('Onward', ()=>Game.endEncounter());
   }
 
   function campfire(){
     const s=Game.s; UI.write('A brief lull in the fighting.'); UI.clearActions();
-    UI.addAction('Rest (+6 HP)', ()=>{ s.hp = clamp(s.hp+6,0,s.maxHp); UI.write('<span class="good">You patch wounds and reload.</span>'); UI.syncStats(); Game.advanceRoom(); });
-    UI.addAction('Scavenge (d20)', ()=>{ const r = RNG.rollDie(20); if(r>=18){ s.kits++; UI.write('<span class="good">You find a rare medkit.</span>'); } else if(r>=12){ s.nades++; UI.write('<span class="good">You find a grenade.</span>'); } else if(r>=8){ s.money+=10; UI.write('<span class="good">You loot ₮10.</span>'); } else { UI.write('Nothing useful.'); } UI.syncStats(); Game.advanceRoom(); });
+    UI.addAction('Rest (+6 HP)', ()=>{ s.hp = clamp(s.hp+6,0,s.maxHp); UI.write('<span class="good">You patch wounds and reload.</span>'); UI.syncStats(); Game.endEncounter(); });
+    UI.addAction('Scavenge (d20)', ()=>{ const r = RNG.rollDie(20); if(r>=18){ s.kits++; UI.write('<span class="good">You find a rare medkit.</span>'); } else if(r>=12){ s.nades++; UI.write('<span class="good">You find a grenade.</span>'); } else if(r>=8){ s.money+=10; UI.write('<span class="good">You loot ₮10.</span>'); } else { UI.write('Nothing useful.'); } UI.syncStats(); Game.endEncounter(); });
     UI.addAction("Return to Angel's Watch", ()=>{ location.hash = '#/hub'; });
   }
 
   // ---------- Mechanics ----------
-  function statCheck(stat, dc){ const s=Game.s; const roll=RNG.rollDie(20); const mod=(stat==='will'?s.will:s.pow); const total=roll+mod; return { ok:total>=dc && roll!==1, crit:roll===20, fumble:roll===1, roll, mod, dc }; }
-  function loot(){ const s=Game.s; const r=RNG.next(); if(r<0.15){ s.kits++; UI.write('You recover a (rare) medkit.'); } else if(r<0.5){ s.nades++; UI.write('You salvage a grenade.'); } else { s.hp=clamp(s.hp+4,0,s.maxHp); UI.write('You catch your breath (+4 HP).'); } UI.syncStats(); }
+  function skillCheck(stat, dc){ const s=Game.s; const roll=RNG.rollDie(20); const mod=(stat==='will'?s.will:s.pow); const total=roll+mod; return { ok:total>=dc && roll!==1, crit:roll===20, fumble:roll===1, roll, mod, dc }; }
+  function loot(){
+    const s=Game.s; const r=RNG.next(); if(r<0.15){ s.kits++; UI.write('You recover a (rare) medkit.'); } else if(r<0.5){ s.nades++; UI.write('You salvage a grenade.'); } else { s.hp=clamp(s.hp+4,0,s.maxHp); UI.write('You catch your breath (+4 HP).'); } UI.syncStats(); }
 
   // ----------------- Hub (Shop) -----------------
   const Hub = {
@@ -421,6 +443,7 @@
     sync(){ if(!Game.s) return; const s=Game.s; this.money.textContent=s.money; this.kits.textContent=s.kits; this.nades.textContent=s.nades; this.lvl.textContent=s.lvl; },
     buy(cost, fn){ const s=Game.s; if(s.money>=cost){ s.money-=cost; fn(); UI.write(`<span class='good'>Purchased for ₮${cost}.</span>`); this.sync(); UI.syncStats(); } }
   };
+
   gid('buyKit').addEventListener('click', ()=>Hub.buy(30, ()=>Game.s.kits++));
   gid('buyNade').addEventListener('click', ()=>Hub.buy(20, ()=>Game.s.nades++));
   gid('buyArmor').addEventListener('click', ()=>Hub.buy(60, ()=>Game.s.armor++));
@@ -433,7 +456,10 @@
     const arch = gid('arch'); const sub = gid('sub');
     function fillSub(){ const key = arch.value; sub.innerHTML=''; for(const s of SUBFACTIONS[key]){ const o=document.createElement('option'); o.value=s.id; o.textContent=s.name; sub.appendChild(o); } }
     arch.addEventListener('change', fillSub); fillSub();
-    gid('startBtn').addEventListener('click', ()=>{ const seed = gid('seed').value.trim(); Game.start(arch.value, sub.value, gid('diff').value, seed); });
+    gid('startBtn').addEventListener('click', ()=>{
+      const seed = gid('seed').value.trim();
+      Game.start(arch.value, sub.value, gid('diff').value, seed);
+    });
     gid('goHubBtn').addEventListener('click', ()=>{ location.hash = '#/hub'; });
   }
   </script>
