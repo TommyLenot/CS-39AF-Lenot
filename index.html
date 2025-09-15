@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Grimdark Roguelite · Text RPG (SPA)</title>
+  <title>Indomitus: Tower of Abyss · Text Roguelite (SPA)</title>
   <style>
     :root{
       --bg:#0b0f14; --panel:#111723; --ink:#e7eef8; --muted:#93a6bf; --accent:#7fb3ff; --good:#4ad69d; --bad:#ff6b6b; --amber:#ffcc66;
@@ -13,7 +13,7 @@
     html,body{height:100%}
     body{margin:0; font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; color:var(--ink); background:radial-gradient(1200px 900px at 80% -20%, #1a2331 0%, transparent 70%), var(--bg)}
     header{position:sticky; top:0; z-index:10; backdrop-filter:saturate(140%) blur(8px); background:linear-gradient(180deg, rgba(12,16,22,.85), rgba(12,16,22,.6)); border-bottom:1px solid rgba(255,255,255,.06)}
-    .wrap{max-width:980px; margin:0 auto; padding:14px 18px}
+    .wrap{max-width:1020px; margin:0 auto; padding:14px 18px}
     nav{display:flex; align-items:center; gap:10px}
     .brand{font-weight:800; letter-spacing:.2px; margin-right:auto}
     a.pill{display:inline-flex; align-items:center; gap:.5rem; text-decoration:none; color:var(--ink); border:1px solid rgba(255,255,255,.08); padding:8px 14px; border-radius:999px; background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03)); transition:transform .12s ease, border-color .2s ease}
@@ -25,7 +25,7 @@
     .card{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.06); border-radius:var(--radius); box-shadow:var(--shadow); padding:22px; margin-block:18px}
     h1{font-size:clamp(26px,4vw,38px); margin:6px 0}
     h2{font-size:clamp(20px,2.6vw,26px); margin:10px 0}
-    p.lead{color:var(--muted); max-width:70ch}
+    p.lead{color:var(--muted); max-width:75ch}
 
     .grid{display:grid; gap:16px; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr))}
 
@@ -35,8 +35,8 @@
     .btn:hover{border-color:rgba(255,255,255,.25)}
     .chip{display:inline-flex; align-items:center; gap:8px; padding:7px 10px; border-radius:999px; background:#0f1623; border:1px solid rgba(255,255,255,.08); color:var(--muted); font-size:14px}
 
-    .log{background:#0c131e; border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:12px; min-height:220px; max-height:380px; overflow:auto; font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace}
-    .log p{margin:.4rem 0}
+    .log{background:#0c131e; border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:12px; min-height:240px; max-height:440px; overflow:auto; font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace}
+    .log p{margin:.45rem 0}
     .good{color:var(--good)}
     .bad{color:var(--bad)}
     .amber{color:var(--amber)}
@@ -50,9 +50,10 @@
   <header>
     <div class="wrap">
       <nav>
-        <div class="brand">⚔️ Grimdark Roguelite (Text RPG)</div>
+        <div class="brand">⚔️ Indomitus: Tower of Abyss (Text Roguelite)</div>
         <a class="pill" href="#/" data-link>Home</a>
         <a class="pill" href="#/game" data-link>Game</a>
+        <a class="pill" href="#/hub" data-link>Angel's Watch</a>
         <a class="pill" href="#/codex" data-link>Codex</a>
       </nav>
     </div>
@@ -62,13 +63,13 @@
     <!-- Home -->
     <section class="route" data-route="/">
       <div class="card">
-        <h1>Text Roguelite in a grimdark far future</h1>
-        <p class="lead">Choose an archetype, face random encounters, roll d20 for actions, and push as far as you can. Single-file SPA, no backend. Scores and unlocks save locally.</p>
+        <h1>Indomitus Crusade: Tower of Abyss</h1>
+        <p class="lead">Prologue — You are part of a vast Imperial host waging the Indomitus Crusade on the world of <strong>Sigra</strong>. The forces of Chaos have raised a black spire, the <strong>Tower of Abyss</strong>. You are chosen to enter, strike at its heart, and return to <strong>Angel's Watch</strong>—an Imperial stronghold—to resupply. Descend to <strong>Floor 10</strong>, defeat the guardian, and collapse the tower to free Sigra for the Imperium.</p>
         <p><a class="pill" href="#/game">▶ New Run</a></p>
       </div>
       <div class="grid">
-        <div class="card"><h2>What this is</h2><p>Minimal roguelite loop: explore → encounter → resolve (skill check or combat) → loot → advance. Death resets the run but keeps unlocks.</p></div>
-        <div class="card"><h2>Dice & checks</h2><p>Roll <code>d20 + skill</code> vs a DC. 20 is a crit (strong effect); 1 is a fumble (bad twist).</p></div>
+        <div class="card"><h2>How to play</h2><p>Pick a class and chapter/order/regiment, then push room by room. Encounters are combat, tests, or brief rests. Each combat round has a small chance for a random twist (1 in 6). Medkits are rare but fully heal. Armor reduces damage <em>and</em> raises AC. Kill foes to earn XP and Thrones (₮), scaled by floor. Return to Angel's Watch to shop. Level cap is 40; every 5 levels, gain +1 to a random stat.</p></div>
+        <div class="card"><h2>Dice</h2><p>Attacks: <code>d20 + POW + 2</code> vs DEF; crit on 20. Damage scales with <strong>Power</strong>. <strong>Will</strong> boosts Pray healing. <strong>Armor</strong> reduces incoming damage and increases AC.</p></div>
       </div>
     </section>
 
@@ -78,13 +79,15 @@
         <h1>New Run</h1>
         <div class="ui" id="newRun">
           <div class="row">
-            <label>Archetype:
+            <label>Class:
               <select id="arch">
-                <option value="guardsman">Imperial Guardsman (balanced)</option>
-                <option value="scout">Space Marine Scout (melee)</option>
-                <option value="sister">Sister Novice (resolve)</option>
-                <option value="tech">Tech-Acolyte (tinker)</option>
+                <option value="marine">Space Marine</option>
+                <option value="sister">Sister of Battle</option>
+                <option value="guard">Imperial Guardsman</option>
               </select>
+            </label>
+            <label>Chapter / Order / Regiment:
+              <select id="sub"></select>
             </label>
             <label>Difficulty:
               <select id="diff">
@@ -104,11 +107,16 @@
           <div class="row">
             <span class="chip">HP: <strong id="hp">-</strong></span>
             <span class="chip">Armor: <strong id="armor">-</strong></span>
+            <span class="chip">Will: <strong id="will">-</strong></span>
+            <span class="chip">Power: <strong id="pow">-</strong></span>
             <span class="chip">Medkits: <strong id="kits">-</strong></span>
             <span class="chip">Grenades: <strong id="nades">-</strong></span>
-            <span class="chip">Floor: <strong id="floor">1</strong></span>
             <span class="chip">Room: <strong id="room">-</strong></span>
+            <span class="chip">Lvl: <strong id="lvl">1</strong></span>
+            <span class="chip">XP: <strong id="xp">0</strong></span>
+            <span class="chip">₮: <strong id="money">0</strong></span>
             <span class="chip">Best Floor: <strong id="best">0</strong></span>
+            <button class="btn" id="goHubBtn" style="margin-left:auto">Return to Angel's Watch</button>
           </div>
         </div>
         <div class="card">
@@ -119,28 +127,58 @@
       </div>
     </section>
 
+    <!-- Hub / Shop -->
+    <section class="route" data-route="/hub">
+      <div class="card">
+        <h1>Angel's Watch – Rogue Trader</h1>
+        <p class="lead">Spend Thrones to prepare for the next descent into the Tower of Abyss.</p>
+        <div class="row">
+          <span class="chip">Your ₮: <strong id="hubMoney">0</strong></span>
+          <span class="chip">Medkits: <strong id="hubKits">0</strong></span>
+          <span class="chip">Grenades: <strong id="hubNades">0</strong></span>
+          <span class="chip">Lvl: <strong id="hubLvl">1</strong></span>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <h2>Supplies</h2>
+          <div class="row">
+            <button class="btn" id="buyKit">Buy Medkit (₮30)</button>
+            <button class="btn" id="buyNade">Buy Grenade (₮20)</button>
+            <button class="btn" id="buyArmor">Buy Plating (+1 Armor, ₮60)</button>
+            <button class="btn" id="buyPower">Augmetics (+1 Power, ₮70)</button>
+            <button class="btn" id="buyWill">Rosarius (+1 Will, ₮70)</button>
+          </div>
+        </div>
+        <div class="card">
+          <h2>Depart</h2>
+          <p>Resume your run at the next room you had reached.</p>
+          <button class="btn" id="departBtn">Back to the Tower</button>
+        </div>
+      </div>
+    </section>
+
     <!-- Codex -->
     <section class="route" data-route="/codex">
       <div class="card">
         <h1>Codex</h1>
-        <p class="lead">Archetypes and skills</p>
+        <p class="lead">Classes, subfactions, and starting stats</p>
         <ul>
-          <li><strong>Guardsman</strong> — HP 24, Armor 1, skills: Melee +1, Shoot +2, Resolve +0, Tinker +1.</li>
-          <li><strong>Scout Marine</strong> — HP 30, Armor 2, skills: Melee +3, Shoot +1, Resolve +1, Tinker -1.</li>
-          <li><strong>Sister Novice</strong> — HP 26, Armor 1, skills: Melee +1, Shoot +1, Resolve +3, Tinker +0.</li>
-          <li><strong>Tech-Acolyte</strong> — HP 22, Armor 1, skills: Melee +0, Shoot +1, Resolve +0, Tinker +3.</li>
+          <li><strong>Space Marine</strong> — HP 35, Armor 2, Will 2, Power 2. Chapters: <em>Imperial Fists</em> (+2 Armor), <em>Blood Angels</em> (+2 Power), <em>Ultramarines</em> (+1 Will, +10 HP).</li>
+          <li><strong>Sister of Battle</strong> — HP 30, Armor 1, Will 3, Power 2. Orders: <em>Argent Shroud</em> (+2 Will), <em>Our Martyred Lady</em> (+1 Will, +1 Armor), <em>Ebon Chalice</em> (+1 Power, +5 HP).</li>
+          <li><strong>Imperial Guardsman</strong> — HP 25, Armor 1, Will 2, Power 2. Regiments: <em>Cadian</em> (+1 Armor, +1 Power), <em>Catachan</em> (+2 Power), <em>Kriegsman</em> (+1 Will, +10 HP).</li>
         </ul>
-        <p>Checks: <code>d20 + skill ≥ DC</code>. Combat: roll to hit vs enemy DEF; damage uses simple dice.</p>
+        <p>Attacks: <code>d20 + POW + 2</code> vs DEF (crit on 20). Damage scales with <strong>Power</strong>. <strong>Armor</strong> reduces incoming damage and raises your AC. <strong>Will</strong> increases Pray healing. Boss on Floor 10.</p>
       </div>
     </section>
 
     <!-- 404 -->
     <section class="route" data-route="/404">
-      <div class="card"><h1>Not found</h1><p class="lead">Try Home or Game.</p></div>
+      <div class="card"><h1>Not found</h1><p class="lead">Try Home, Game, or Angel's Watch.</p></div>
     </section>
   </main>
 
-  <footer>Built with ❤️ using just HTML, CSS, and JavaScript. Names/lore are nods to a popular grimdark setting; this is a fan-made prototype.</footer>
+  <footer>Built with ❤️ using just HTML, CSS, and JavaScript. Fan-made prototype inspired by a grimdark setting.</footer>
 
   <script>
   'use strict';
@@ -149,49 +187,64 @@
   const navLinks = Array.from(document.querySelectorAll('a[data-link]'));
   const app = document.getElementById('app');
   function setActiveLink(route){ navLinks.forEach(a=>{ const target=new URL(a.href).hash.slice(1)||'/'; a.setAttribute('aria-current', target===route?'page':'false'); }); }
-  function showRoute(route){ let found=false; routes.forEach(el=>{ const match=el.dataset.route===route; el.classList.toggle('active',match); if(match) found=true; }); if(!found){ route='/404'; routes.forEach(el=>el.classList.toggle('active', el.dataset.route===route)); } setActiveLink(route); app.focus({preventScroll:true}); if(route==='/game'){ UI.syncStats(); UI.setBest(Store.best()); } }
+  function showRoute(route){ let found=false; routes.forEach(el=>{ const match=el.dataset.route===route; el.classList.toggle('active',match); if(match) found=true; }); if(!found){ route='/404'; routes.forEach(el=>el.classList.toggle('active', el.dataset.route===route)); } setActiveLink(route); app.focus({preventScroll:true}); if(route==='/game'){ UI.syncStats(); UI.setBest(Store.best()); } if(route==='/hub'){ Hub.sync(); } }
   function getHash(){ const raw=location.hash.slice(1); return raw&&raw.startsWith('/')?raw:'/'; }
-  addEventListener('hashchange',()=>showRoute(getHash())); addEventListener('load',()=>showRoute(getHash()));
+  addEventListener('hashchange',()=>showRoute(getHash())); addEventListener('load',()=>{ initNewRunUI(); showRoute(getHash()); });
 
   // ----------------- Utilities -----------------
   const RNG = (()=>{
     let s = 0x2F6E2B1; // default seed
     function seed(x){ s = x>>>0 || (Math.random()*1e9)|0; }
-    function next(){ // xorshift32
-      s ^= s << 13; s ^= s >>> 17; s ^= s << 5; return (s>>>0)/4294967296; }
+    function next(){ s ^= s << 13; s ^= s >>> 17; s ^= s << 5; return (s>>>0)/4294967296; }
     function rollDie(sides){ return (next()*sides|0)+1; }
-    function roll(expr){ // e.g. "1d8+2"
-      const m = /^(\d+)d(\d+)([+-]\d+)?$/.exec(expr.trim());
-      if(!m) return 0; const n=+m[1], d=+m[2], k=m[3]?+m[3]:0; let t=0; for(let i=0;i<n;i++) t+=rollDie(d); return t+k; }
+    function roll(expr){ const m = /^(\d+)d(\d+)([+-]\d+)?$/.exec(expr.trim()); if(!m) return 0; const n=+m[1], d=+m[2], k=m[3]?+m[3]:0; let t=0; for(let i=0;i<n;i++) t+=rollDie(d); return t+k; }
     return { seed, next, rollDie, roll };
   })();
-
   function clamp(x,a,b){ return Math.max(a, Math.min(b,x)); }
+  function pick(arr){ return arr[(RNG.next()*arr.length)|0]; }
+  function hashString(str){ let h=2166136261>>>0; for(let i=0;i<str.length;i++){ h^=str.charCodeAt(i); h=(h*16777619)>>>0; } return h; }
 
   // ----------------- Data -----------------
   const ARCHETYPES = {
-    guardsman:{ name:'Imperial Guardsman', hp:24, armor:1, skills:{melee:1, shoot:2, resolve:0, tinker:1}, kits:1, nades:1 },
-    scout:{ name:'Space Marine Scout', hp:30, armor:2, skills:{melee:3, shoot:1, resolve:1, tinker:-1}, kits:1, nades:0 },
-    sister:{ name:'Sister Novice', hp:26, armor:1, skills:{melee:1, shoot:1, resolve:3, tinker:0}, kits:2, nades:0 },
-    tech:{ name:'Tech-Acolyte', hp:22, armor:1, skills:{melee:0, shoot:1, resolve:0, tinker:3}, kits:1, nades:1 },
+    marine:{ name:'Space Marine', base:{ hp:35, armor:2, will:2, pow:2, kits:1, nades:0 } },
+    sister:{ name:'Sister of Battle', base:{ hp:30, armor:1, will:3, pow:2, kits:2, nades:0 } },
+    guard:{ name:'Imperial Guardsman', base:{ hp:25, armor:1, will:2, pow:2, kits:1, nades:1 } },
+  };
+
+  const SUBFACTIONS = {
+    marine:[
+      { id:'fists', name:'Imperial Fists', bonus:{ armor:+2 } },
+      { id:'blood', name:'Blood Angels', bonus:{ pow:+2 } },
+      { id:'ultra', name:'Ultramarines', bonus:{ will:+1, hp:+10 } },
+    ],
+    sister:[
+      { id:'argent', name:'Order of the Argent Shroud', bonus:{ will:+2 } },
+      { id:'martyred', name:'Order of Our Martyred Lady', bonus:{ will:+1, armor:+1 } },
+      { id:'ebon', name:'Order of the Ebon Chalice', bonus:{ pow:+1, hp:+5 } },
+    ],
+    guard:[
+      { id:'cadian', name:'Cadian', bonus:{ armor:+1, pow:+1 } },
+      { id:'catachan', name:'Catachan', bonus:{ pow:+2 } },
+      { id:'krieg', name:'Kriegsman', bonus:{ will:+1, hp:+10 } },
+    ]
   };
 
   const ENEMIES = [
-    { id:'cultist', name:'Heretic Cultist', hp:14, atk:3, def:11, dmg:'1d6+1' },
-    { id:'ork', name:'Ork Boy', hp:22, atk:4, def:12, dmg:'1d8' },
-    { id:'stealer', name:'Genestealer', hp:18, atk:6, def:13, dmg:'1d6+2', crit:19 },
-    { id:'tr8r', name:'Traitor Astartes', hp:30, atk:6, def:14, dmg:'1d8+2' },
+    { id:'cultist', name:'Heretic Cultist', hp:14, atk:3, def:10, dmg:'1d6+1' },
+    { id:'ork', name:'Ork Boy', hp:22, atk:4, def:11, dmg:'1d8' },
+    { id:'stealer', name:'Genestealer', hp:18, atk:6, def:12, dmg:'1d6+2', crit:19 },
+    { id:'tr8r', name:'Traitor Astartes', hp:28, atk:6, def:12, dmg:'1d8+2' },
   ];
 
   const BOSSES = [
-    { id:'champ', name:'Chaos Champion', hp:36, atk:7, def:15, dmg:'1d8+3' },
-    { id:'tyranid', name:'Tyranid Warrior', hp:34, atk:7, def:14, dmg:'1d10+1' },
+    { id:'champ', name:'Chaos Champion', hp:36, atk:7, def:13, dmg:'1d8+3' },
+    { id:'tyranid', name:'Tyranid Warrior', hp:34, atk:7, def:13, dmg:'1d10+1' },
   ];
 
-  // ----------------- Store (scores/unlocks) -----------------
+  // ----------------- Store (best floor) -----------------
   const Store = {
-    key:'grimRogue_scores_v1',
-    read(){ try{return JSON.parse(localStorage.getItem(this.key))||{best:0,runs:0,unlocks:{}};}catch{return {best:0,runs:0,unlocks:{}};} },
+    key:'grimRogue_scores_v2',
+    read(){ try{return JSON.parse(localStorage.getItem(this.key))||{best:0,runs:0};}catch{return {best:0,runs:0};} },
     write(v){ localStorage.setItem(this.key, JSON.stringify(v)); },
     best(){ return this.read().best||0; },
     setBest(n){ const d=this.read(); d.best=Math.max(d.best||0,n); this.write(d); },
@@ -200,99 +253,130 @@
 
   // ----------------- UI Helpers -----------------
   const UI = (()=>{
-    const hp=document.getElementById('hp'), armor=document.getElementById('armor'), kits=document.getElementById('kits'), nades=document.getElementById('nades'), room=document.getElementById('room'), floor=document.getElementById('floor'), log=document.getElementById('log'), actions=document.getElementById('actions'), best=document.getElementById('best');
+    const hp=gid('hp'), armor=gid('armor'), kits=gid('kits'), nades=gid('nades'), room=gid('room'), log=gid('log'), actions=gid('actions');
+    const best=gid('best'), will=gid('will'), pow=gid('pow'), lvl=gid('lvl'), xp=gid('xp'), money=gid('money');
     function clearActions(){ actions.innerHTML=''; }
     function addAction(label, on){ const b=document.createElement('button'); b.className='btn'; b.textContent=label; b.addEventListener('click', on); actions.appendChild(b); return b; }
     function write(html){ const p=document.createElement('p'); p.innerHTML=html; log.appendChild(p); log.scrollTop=log.scrollHeight; }
     function resetLog(){ log.innerHTML=''; }
-    function syncStats(){ if(!Game.state) return; const s=Game.state; hp.textContent=`${s.hp}/${s.maxHp}`; armor.textContent=s.armor; kits.textContent=s.kits; nades.textContent=s.nades; floor.textContent=s.floor; room.textContent=`${s.room}/10`; }
+    function syncStats(){ if(!Game.s) return; const s=Game.s; hp.textContent=`${s.hp}/${s.maxHp}`; armor.textContent=s.armor; kits.textContent=s.kits; nades.textContent=s.nades; room.textContent=s.room; will.textContent=s.will; pow.textContent=s.pow; lvl.textContent=s.lvl; xp.textContent=`${s.exp}/${xpToNext(s.lvl)}`; money.textContent=s.money; }
     function setBest(n){ best.textContent=n; }
     return { clearActions, addAction, write, resetLog, syncStats, setBest };
   })();
+  function gid(id){ return document.getElementById(id); }
 
   // ----------------- Game Core -----------------
   const Game = {
-    state:null,
-    start(archKey, diff, seed){
+    s:null, // state
+    start(archKey, subId, diff, seed){
       RNG.seed(seed? hashString(seed): 0);
-      const a = ARCHETYPES[archKey]||ARCHETYPES.guardsman;
-      const d = { name:a.name, maxHp:a.hp, hp:a.hp, armor:a.armor, kits:a.kits, nades:a.nades, skills:{...a.skills}, floor:1, room:1, dead:false, diff }; 
-      this.state = d;
+      const base = JSON.parse(JSON.stringify(ARCHETYPES[archKey].base));
+      const sub = SUBFACTIONS[archKey].find(x=>x.id===subId) || SUBFACTIONS[archKey][0];
+      applyBonus(base, sub.bonus);
+      this.s = { name:ARCHETYPES[archKey].name, sub:sub.name, diff,
+        maxHp:base.hp, hp:base.hp, armor:base.armor, will:base.will, pow:base.pow,
+        kits:base.kits, nades:base.nades, room:1, dead:false,
+        exp:0, lvl:1, money:0 };
       UI.resetLog();
-      UI.write(`<span class="amber">You are a ${a.name}. Mission: purge the heretic.</span>`);
+      UI.write(`<span class="amber">You are a ${this.s.name} of the ${this.s.sub}. Mission: breach the Tower of Abyss.</span>`);
       UI.syncStats();
       this.nextEncounter();
     },
     nextEncounter(){
-      const s=this.state; if(s.dead) return;
+      const s=this.s; if(s.dead) return;
       UI.clearActions();
-      // Boss is the 10th room on EVERY floor
-      if(s.room===10){
+      // Boss at floor 10
+      if(s.room>0 && s.room%10===0){
         const boss = pick(BOSSES);
         combatStart(boss, true);
         return;
       }
-    }
       const r = RNG.next();
-      if(r<0.55){ // skirmish
+      if(r<0.55){
         const foe = pick(ENEMIES);
         combatStart(foe, false);
-      } else if(r<0.8){ // skill event
+      } else if(r<0.8){
         skillEvent();
-      } else { // rest/loot
+      } else {
         campfire();
       }
     },
-    advanceRoom(){ const s=this.state; if(s.dead) return; s.room = Math.min(10, s.room+1); UI.syncStats(); this.nextEncounter(); },
-    advanceFloor(){ const s=this.state; if(s.dead) return; s.floor += 1; s.room = 1; UI.write(`<strong class='good'>Floor ${s.floor-1} cleared. Descending to Floor ${s.floor}.</strong>`); Store.setBest(Math.max(Store.best(), s.floor-1)); UI.syncStats(); this.nextEncounter(); },
+    endEncounter(){
+      const s=this.s; s.room++; UI.syncStats();
+      if(!s.dead) this.nextEncounter();
+    },
     die(){
-      const s=this.state; if(!s || s.dead) return; s.dead=true; Store.setBest(Math.max(Store.best(), s.floor)); Store.addRun();
+      const s=this.s; if(!s || s.dead) return; s.dead=true; Store.setBest(Math.max(Store.best(), s.room-1)); Store.addRun();
       UI.clearActions();
-      UI.write(`<span class="bad">You fall on Floor ${s.floor}, Room ${s.room}. The run ends.</span>`);
+      UI.write(`<span class="bad">You fall on room ${s.room}. The run ends.</span>`);
       UI.addAction('New Run', ()=>location.hash = '#/game');
       UI.setBest(Store.best());
+    },
+    victory(){
+      const s=this.s; s.dead=true; Store.setBest(Math.max(Store.best(), 10));
+      UI.write(`<strong class='good'>The floor-10 boss is slain. The Tower of Abyss collapses. Sigra is free!</strong>`);
+      UI.clearActions(); UI.addAction('New Run', ()=>location.hash = '#/game');
     }
   };
 
-  // ---------- Encounter: Combat ----------
+  function applyBonus(base, bonus){ for(const k in bonus){ base[k] = (base[k]||0) + bonus[k]; } }
+
+  // ---------- Combat ----------
   function combatStart(template, boss=false){
     const foe = JSON.parse(JSON.stringify(template));
-    const s = Game.state;
+    const s = Game.s;
     UI.write(`<strong>${boss? 'BOSS: ':''}${foe.name}</strong> appears. (HP ${foe.hp}, DEF ${foe.def})`);
-    UI.clearActions();
+
+    const state = { enemySkip:false, playerAdv:false, playerSkip:false };
+
     const turn = () => {
+      // random event: 1 in 6 chance each round
+      if(RNG.rollDie(6)===1){ randomCombatEvent(state, foe); if(s.dead) return; }
+
+      // skip player turn if jammed
+      if(state.playerSkip){ state.playerSkip=false; return enemyTurn(); }
+
       UI.clearActions();
-      UI.addAction('Shoot', ()=> playerAttack('shoot', foe, turn));
-      UI.addAction('Strike', ()=> playerAttack('melee', foe, turn));
-      if(s.nades>0) UI.addAction('Grenade', ()=>{ s.nades--; const dmg = RNG.roll('2d6'); foe.hp -= dmg; UI.write(`<span class="good">You throw a grenade for ${dmg}!</span> Foe HP ${Math.max(foe.hp,0)}`); enemyTurn(); });
-      if(s.kits>0) UI.addAction('Medkit', ()=>{ s.kits--; const heal = 8; s.hp = clamp(s.hp+heal, 0, s.maxHp); UI.write(`<span class="good">You patch wounds (+${heal}).</span>`); UI.syncStats(); enemyTurn(); });
-      UI.addAction('Pray (Resolve)', ()=>{ const ro = skillCheck('resolve', 12); if(ro.ok){ const heal= RNG.roll('1d6+2'); s.hp=clamp(s.hp+heal,0,s.maxHp); UI.write(`<span class="good">A moment of faith restores ${heal} HP.</span>`);} else { UI.write(`<span class="bad">Your voice falters. No aid comes.</span>`);} UI.syncStats(); enemyTurn(); });
-      UI.addAction('Tinker (Shield)', ()=>{ const ro = skillCheck('tinker', 12); if(ro.ok){ s.armor+=1; UI.write(`<span class="good">You jury-rig extra plating (+1 Armor this fight).</span>`);} else { UI.write(`<span class='bad'>Tools jam; no effect.</span>`);} UI.syncStats(); enemyTurn(); });
+      UI.addAction('Shoot', ()=> playerAttack('shoot', foe, turn, state));
+      UI.addAction('Strike', ()=> playerAttack('melee', foe, turn, state));
+      if(s.nades>0) UI.addAction('Grenade', ()=>{ s.nades--; const raw = RNG.roll('2d6') + Math.floor(s.pow/2); const real = Math.max(0, raw - Math.floor(foe.def/6)); foe.hp -= real; UI.write(`<span class="good">Grenade explodes (${raw} → ${real}).</span> Foe HP ${Math.max(foe.hp,0)}`); enemyTurn(); });
+      if(s.kits>0) UI.addAction('Medkit (full heal)', ()=>{ s.kits--; s.hp = s.maxHp; UI.write(`<span class="good">You fully heal.</span>`); UI.syncStats(); enemyTurn(); });
+      UI.addAction('Pray (Will)', ()=>{ const heal = RNG.roll('1d6') + 2 + s.will; s.hp = clamp(s.hp + heal, 0, s.maxHp); UI.write(`<span class="good">Faith restores ${heal} HP.</span>`); UI.syncStats(); enemyTurn(); });
+      UI.addAction("Retreat to Angel's Watch", ()=>{ location.hash = '#/hub'; });
     };
 
-    function playerAttack(kind, foe, next){
-      const s=Game.state; const mod = s.skills[kind]; const tag = kind==='shoot'? 'bolt fire':'chainsword';
-      const roll = RNG.rollDie(20); const total=roll+mod;
-      if(roll===20){ const dmg= RNG.roll('1d8+2')+mod; foe.hp-=dmg; UI.write(`<span class='good'>CRIT! Your ${tag} tears for ${dmg}. Foe HP ${Math.max(foe.hp,0)}</span>`); }
-      else if(roll===1){ UI.write(`<span class='bad'>You stumble; the attack goes wide.</span>`); }
-      else if(total>=foe.def){ const dmg= RNG.roll('1d8+1'); foe.hp-=dmg; UI.write(`<span class='good'>Hit for ${dmg}. Foe HP ${Math.max(foe.hp,0)}</span>`); }
+    function playerAttack(kind, foe, next, state){
+      const tag = kind==='shoot'? 'bolt fire':'blade';
+      const d20a = RNG.rollDie(20); const d20b = RNG.rollDie(20);
+      const roll = state.playerAdv ? Math.max(d20a,d20b) : d20a;
+      const mod = Game.s.pow + 2; // increased hit chance per feedback
+      const total = roll + mod;
+      if(roll===20){ const dmg= RNG.roll('1d8+2') + Game.s.pow; foe.hp-=dmg; UI.write(`<span class='good'>CRIT! Your ${tag} deals ${dmg}. Foe HP ${Math.max(foe.hp,0)}</span>`); }
+      else if(roll===1){ UI.write(`<span class='bad'>Fumble—your ${tag} misses.</span>`); }
+      else if(total>=foe.def){ const dmg= RNG.roll('1d8+1') + Math.floor(Game.s.pow/1); foe.hp-=dmg; UI.write(`<span class='good'>Hit for ${dmg}. Foe HP ${Math.max(foe.hp,0)}</span>`); }
       else { UI.write(`Miss (rolled ${roll}+${mod} vs DEF ${foe.def}).`); }
+      state.playerAdv=false;
       if(foe.hp<=0){
-        UI.write(`<strong class='good'>${foe.name} is destroyed.</strong>`);
+        const rewards = onKillRewards(Game.s.room, boss);
+        Game.s.exp += rewards.xp; Game.s.money += rewards.credits;
+        UI.write(`<span class='good'>${foe.name} falls. +${rewards.xp} XP, +₮${rewards.credits}.</span>`);
+        levelCheck(); UI.syncStats();
+        if(boss && Game.s.room===10){ Game.victory(); return; }
         loot();
-        Game.advanceRoom();loor() : Game.advanceRoom();
+        Game.endEncounter();
       } else {
         enemyTurn();
       }
     }
 
     function enemyTurn(){
-      const s=Game.state; if(s.dead) return;
-      const r = RNG.rollDie(20); const bonus = foe.atk; const total=r+bonus; const target = 10 + s.armor + (Game.state.diff==='hard'?1:0);
-      if(foe.crit && r>=foe.crit){ const dmg = RNG.roll(foe.dmg)*2; s.hp -= dmg; UI.write(`<span class='bad'>${foe.name} CRITS for ${dmg}!</span>`); }
-      else if(total>=target){ const dmg = RNG.roll(foe.dmg); s.hp -= dmg; UI.write(`<span class='bad'>${foe.name} hits for ${dmg} (rolled ${r}+${bonus} vs AC ${target}).</span>`); }
+      if(Game.s.dead) return;
+      if(state.enemySkip){ UI.write(`<span class='amber'>${foe.name} stumbles and loses the turn.</span>`); state.enemySkip=false; return turn(); }
+      const r = RNG.rollDie(20); const bonus = foe.atk; const total=r+bonus; const target = 10 + Game.s.armor + (Game.s.diff==='hard'?1:0);
+      if(foe.crit && r>=foe.crit){ let dmg = RNG.roll(foe.dmg)*2; dmg = Math.max(0, dmg - Game.s.armor); Game.s.hp -= dmg; UI.write(`<span class='bad'>${foe.name} CRITS for ${dmg} after armor!</span>`); }
+      else if(total>=target){ let dmg = RNG.roll(foe.dmg); dmg = Math.max(0, dmg - Game.s.armor); Game.s.hp -= dmg; UI.write(`<span class='bad'>${foe.name} hits for ${dmg} (rolled ${r}+${bonus} vs AC ${target}).</span>`); }
       else { UI.write(`${foe.name} misses (rolled ${r}+${bonus}).`); }
-      if(s.hp<=0){ UI.syncStats(); Game.die(); return; }
+      if(Game.s.hp<=0){ UI.syncStats(); Game.die(); return; }
       UI.syncStats();
       turn();
     }
@@ -300,47 +384,84 @@
     turn();
   }
 
-  // ---------- Encounter: Skill ----------
+  function randomCombatEvent(state, foe){
+    const s=Game.s; const which = RNG.rollDie(4); // 4 possible events
+    if(which===1){ UI.write('<span class="bad">Weapon jam! You lose this action.</span>'); state.playerSkip=true; }
+    else if(which===2){ const dmg = RNG.roll('1d6'); const you = Math.max(0, dmg - s.armor); const them = Math.max(0, dmg - Math.floor(foe.def/6)); s.hp -= you; foe.hp -= them; UI.write(`<span class='amber'>Warp surge! Both suffer ${dmg} raw (${you} to you after armor).</span>`); if(s.hp<=0){ UI.syncStats(); Game.die(); } }
+    else if(which===3){ UI.write('<span class="good">Blessed aim—advantage on your next attack.</span>'); state.playerAdv=true; }
+    else { UI.write(`<span class='amber'>${foe.name} falters; they will miss their next turn.</span>`); state.enemySkip=true; }
+    UI.syncStats();
+  }
+
+  function onKillRewards(floor, boss){ const xp = (boss? 20: 6) + floor*2; const credits = (boss? 30: 5) + floor*3; return { xp, credits }; }
+
+  function xpToNext(lvl){ return 20 + (lvl-1)*10; }
+  function levelCheck(){
+    const s=Game.s;
+    while(s.exp >= xpToNext(s.lvl) && s.lvl < 40){
+      s.exp -= xpToNext(s.lvl);
+      s.lvl++;
+      UI.write(`<span class='good'>Level up! You are now level ${s.lvl}.</span>`);
+      if(s.lvl%5===0){ const stat = pick(['will','pow','armor']); s[stat]++; UI.write(`<span class='good'>Milestone bonus: +1 ${stat.toUpperCase()}.</span>`); }
+    }
+  }
+
+  // ---------- Events & Rest ----------
   function skillEvent(){
-    const s=Game.state; const events=[
-      {name:'Sealed Bulkhead', skill:'tinker', dc:[10,13], ok:'You bypass the lock and salvage a stim (medkit +1).', fail:'Alarm screeches; you take 3 damage while rushing.', effect:(ok)=>{ if(ok) s.kits++; else s.hp-=3; }},
-      {name:'Rally the Scattered', skill:'resolve', dc:[10,14], ok:'Your words steel hearts (+4 HP).', fail:'Fear gnaws at you (-2 HP).', effect:(ok)=>{ s.hp=clamp(s.hp+(ok?4:-2),0,s.maxHp); }},
-      {name:'Silent Ambush', skill:'shoot', dc:[11,14], ok:'You drop the sentry from cover (gain a grenade).', fail:'You are spotted (take 3 damage).', effect:(ok)=>{ if(ok) s.nades++; else s.hp-=3; }},
-      {name:'Close Quarters', skill:'melee', dc:[11,15], ok:'A single decisive strike (+1 Armor this run).', fail:'You overextend (-3 HP).', effect:(ok)=>{ if(ok) s.armor++; else s.hp-=3; }},
+    const s=Game.s; const events=[
+      {name:'Sealed Bulkhead', skill:'pow', ok:'You smash the lock; salvage a grenade.', fail:'Alarm blares; you take 3 damage rushing.', effect:(ok)=>{ if(ok) s.nades++; else s.hp-=3; }},
+      {name:'Rally the Scattered', skill:'will', ok:'Your words steel hearts (+6 HP).', fail:'Doubt gnaws (-2 HP).', effect:(ok)=>{ s.hp=clamp(s.hp+(ok?6:-2),0,s.maxHp); }},
+      {name:'Silent Sentry', skill:'pow', ok:'You drop the sentry from cover (+₮10).', fail:'Spotted! (-3 HP).', effect:(ok)=>{ if(ok) s.money+=10; else s.hp-=3; }},
+      {name:'Close Quarters Drill', skill:'pow', ok:'Decisive strike (+1 Armor this run).', fail:'Overextend (-3 HP).', effect:(ok)=>{ if(ok) s.armor++; else s.hp-=3; }},
     ];
     const ev = pick(events);
-    UI.write(`<em>${ev.name}</em> — test your <strong>${ev.skill}</strong>.`);
-    const ro = skillCheck(ev.skill, pick(ev.dc));
+    UI.write(`<em>${ev.name}</em> — test your <strong>${ev.skill.toUpperCase()}</strong>.`);
+    const ro = skillCheck(ev.skill, 12);
     if(ro.crit){ UI.write(`<span class='good'>Critical success (rolled 20)! ${ev.ok}</span>`); ev.effect(true); }
     else if(ro.ok){ UI.write(`<span class='good'>Success (roll ${ro.roll}+${ro.mod} ≥ ${ro.dc}). ${ev.ok}</span>`); ev.effect(true); }
-    else if(ro.fumble){ UI.write(`<span class='bad'>Fumble (rolled 1). ${ev.fail} And you lose a medkit.</span>`); ev.effect(false); if(s.kits>0) s.kits--; }
+    else if(ro.fumble){ UI.write(`<span class='bad'>Fumble (rolled 1). ${ev.fail} You also drop a grenade if you have one.</span>`); ev.effect(false); if(s.nades>0) s.nades--; }
     else { UI.write(`<span class='bad'>Fail (roll ${ro.roll}+${ro.mod} < ${ro.dc}). ${ev.fail}</span>`); ev.effect(false); }
     UI.syncStats();
     UI.clearActions(); UI.addAction('Onward', ()=>Game.endEncounter());
   }
 
-  // ---------- Encounter: Rest ----------
   function campfire(){
-    const s=Game.state; UI.write('A brief lull in the fighting.'); UI.clearActions();
-    UI.addAction('Rest (+6 HP)', ()=>{ s.hp = clamp(s.hp+6,0,s.maxHp); UI.write('<span class="good">You patch wounds and reload.</span>'); UI.syncStats(); Game.advanceRoom(); });
-    UI.addAction('Scavenge (d20)', ()=>{ const r = RNG.rollDie(20); if(r>=15){ s.kits++; UI.write('<span class="good">You find a medkit.</span>'); } else if(r>=10){ s.nades++; UI.write('<span class="good">You find a grenade.</span>'); } else { UI.write('Nothing useful.'); } UI.syncStats(); Game.advanceRoom(); });
+    const s=Game.s; UI.write('A brief lull in the fighting.'); UI.clearActions();
+    UI.addAction('Rest (+6 HP)', ()=>{ s.hp = clamp(s.hp+6,0,s.maxHp); UI.write('<span class="good">You patch wounds and reload.</span>'); UI.syncStats(); Game.endEncounter(); });
+    UI.addAction('Scavenge (d20)', ()=>{ const r = RNG.rollDie(20); if(r>=18){ s.kits++; UI.write('<span class="good">You find a rare medkit.</span>'); } else if(r>=12){ s.nades++; UI.write('<span class="good">You find a grenade.</span>'); } else if(r>=8){ s.money+=10; UI.write('<span class="good">You loot ₮10.</span>'); } else { UI.write('Nothing useful.'); } UI.syncStats(); Game.endEncounter(); });
+    UI.addAction("Return to Angel's Watch", ()=>{ location.hash = '#/hub'; });
   }
 
   // ---------- Mechanics ----------
-  function skillCheck(skill, dc){ const s=Game.state; const roll=RNG.rollDie(20); const mod=s.skills[skill]||0; const total=roll+mod; return { ok:total>=dc && roll!==1, crit:roll===20, fumble:roll===1, roll, mod, dc }; }
+  function skillCheck(stat, dc){ const s=Game.s; const roll=RNG.rollDie(20); const mod=(stat==='will'?s.will:s.pow); const total=roll+mod; return { ok:total>=dc && roll!==1, crit:roll===20, fumble:roll===1, roll, mod, dc }; }
   function loot(){
-    const s=Game.state; const r=RNG.next(); if(r<0.4){ s.kits++; UI.write('You recover a medkit.'); } else if(r<0.7){ s.nades++; UI.write('You salvage a grenade.'); } else { s.hp=clamp(s.hp+4,0,s.maxHp); UI.write('You catch your breath (+4 HP).'); } UI.syncStats(); }
-  function pick(arr){ return arr[(RNG.next()*arr.length)|0]; }
-  function hashString(str){ let h=2166136261>>>0; for(let i=0;i<str.length;i++){ h^=str.charCodeAt(i); h=(h*16777619)>>>0; } return h; }
+    const s=Game.s; const r=RNG.next(); if(r<0.15){ s.kits++; UI.write('You recover a (rare) medkit.'); } else if(r<0.5){ s.nades++; UI.write('You salvage a grenade.'); } else { s.hp=clamp(s.hp+4,0,s.maxHp); UI.write('You catch your breath (+4 HP).'); } UI.syncStats(); }
+
+  // ----------------- Hub (Shop) -----------------
+  const Hub = {
+    money:gid('hubMoney'), kits:gid('hubKits'), nades:gid('hubNades'), lvl:gid('hubLvl'),
+    sync(){ if(!Game.s) return; const s=Game.s; this.money.textContent=s.money; this.kits.textContent=s.kits; this.nades.textContent=s.nades; this.lvl.textContent=s.lvl; },
+    buy(cost, fn){ const s=Game.s; if(s.money>=cost){ s.money-=cost; fn(); UI.write(`<span class='good'>Purchased for ₮${cost}.</span>`); this.sync(); UI.syncStats(); } }
+  };
+
+  gid('buyKit').addEventListener('click', ()=>Hub.buy(30, ()=>Game.s.kits++));
+  gid('buyNade').addEventListener('click', ()=>Hub.buy(20, ()=>Game.s.nades++));
+  gid('buyArmor').addEventListener('click', ()=>Hub.buy(60, ()=>Game.s.armor++));
+  gid('buyPower').addEventListener('click', ()=>Hub.buy(70, ()=>Game.s.pow++));
+  gid('buyWill').addEventListener('click', ()=>Hub.buy(70, ()=>Game.s.will++));
+  gid('departBtn').addEventListener('click', ()=>{ location.hash = '#/game'; Game.nextEncounter(); });
 
   // ----------------- New Run controls -----------------
-  document.getElementById('startBtn').addEventListener('click', ()=>{
-    const arch = document.getElementById('arch').value;
-    const diff = document.getElementById('diff').value;
-    const seed = document.getElementById('seed').value.trim();
-    Game.start(arch, diff, seed);
-  });
-
+  function initNewRunUI(){
+    const arch = gid('arch'); const sub = gid('sub');
+    function fillSub(){ const key = arch.value; sub.innerHTML=''; for(const s of SUBFACTIONS[key]){ const o=document.createElement('option'); o.value=s.id; o.textContent=s.name; sub.appendChild(o); } }
+    arch.addEventListener('change', fillSub); fillSub();
+    gid('startBtn').addEventListener('click', ()=>{
+      const seed = gid('seed').value.trim();
+      Game.start(arch.value, sub.value, gid('diff').value, seed);
+    });
+    gid('goHubBtn').addEventListener('click', ()=>{ location.hash = '#/hub'; });
+  }
   </script>
 </body>
 </html>
