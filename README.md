@@ -59,6 +59,29 @@ SPA Model: One HTML document; navigation via hash routes (#/, #/game, #/hub, #/c
 
 • Focus management: router moves focus to #app after navigation for screen reader continuity
 
+													Known Issues / Limitations:
+
+• Game balance: numbers are tuned for fun, not rigor—late floors can spike in difficulty
+
+• Can be slow/tedious
+
+• Persistence: only best floor is saved; active runs aren’t persisted across reloads
+
+• Log growth: long sessions may produce tall logs (scrollable, but not paged)
+
+• After starting a game and failing there will be a button that says "New Run" which does not start a new, in order to start a new run Hit the Start Button again.
+													Future Enhancements:
+
+• Save/Resume (serialize Game.s to localStorage)
+
+• Difficulty presets & modifiers (ironman, enemy traits, etc.)
+
+• More events (non-combat puzzles, risk/reward choices, NPCs)
+
+• More event variety and enemy types
+
+• Expanded hub progression (gear tiers, relics, unlocks)	
+
                                                         How to Use:
 
 1. Click Game (or ▶ New Run), choose Class/Subfaction/Difficulty, optionally set a Seed.
