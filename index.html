@@ -18,7 +18,6 @@
     .brand{font-weight:800; letter-spacing:.2px; margin-right:auto}
     a.pill{display:inline-flex; align-items:center; gap:.5rem; text-decoration:none; color:var(--ink); border:1px solid rgba(255,255,255,.08); padding:8px 14px; border-radius:999px; background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03)); transition:transform .12s ease, border-color .2s ease}
     a.pill[aria-current="page"], a.pill:hover{border-color:rgba(255,255,255,.22)}
-
     main{min-height:calc(100vh - 68px)}
     .route{display:none; animation:fade .22s ease both}
     .route.active{display:block}
@@ -26,23 +25,18 @@
     h1{font-size:clamp(26px,4vw,38px); margin:6px 0}
     h2{font-size:clamp(20px,2.6vw,26px); margin:10px 0}
     p.lead{color:var(--muted); max-width:75ch}
-
     .grid{display:grid; gap:16px; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr))}
-
     .ui{display:grid; gap:12px}
     .row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
     .btn{cursor:pointer; border:1px solid rgba(255,255,255,.12); background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); color:var(--ink); padding:10px 14px; border-radius:12px; font-weight:600}
     .btn:hover{border-color:rgba(255,255,255,.25)}
     .chip{display:inline-flex; align-items:center; gap:8px; padding:7px 10px; border-radius:999px; background:#0f1623; border:1px solid rgba(255,255,255,.08); color:var(--muted); font-size:14px}
-
     .log{background:#0c131e; border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:12px; min-height:240px; max-height:440px; overflow:auto; font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace}
     .log p{margin:.45rem 0}
     .good{color:var(--good)}
     .bad{color:var(--bad)}
     .amber{color:var(--amber)}
-
     footer{color:#97a6bb; font-size:13px; padding:30px 18px; text-align:center; opacity:.85}
-
     @keyframes fade{from{opacity:0; transform:translateY(4px)} to{opacity:1; transform:none}}
   </style>
 </head>
@@ -65,11 +59,26 @@
       <div class="card">
         <h1>Indomitus Crusade: Tower of Abyss</h1>
         <p class="lead">Prologue — You are part of a vast Imperial host waging the Indomitus Crusade on the world of <strong>Sigra</strong>. The forces of Chaos have raised a black spire, the <strong>Tower of Abyss</strong>. You are chosen to enter, strike at its heart, and return to <strong>Angel's Watch</strong>—an Imperial stronghold—to resupply. Descend to <strong>Floor 10</strong>, defeat each guardian, and end the threat.</p>
-        <p><a class="pill" href="#/game">▶ New Run</a></p>
+        <p><a class="pill" href="#/game" id="newRunLink">▶ New Run</a></p>
       </div>
       <div class="grid">
-        <div class="card"><h2>How to play</h2><p>Pick a class and chapter/order/regiment, then push room by room. Encounters are combat, tests, or brief rests. Each combat round has a chance for a random twist (1 in 6). Medkits are rare but fully heal. Armor reduces damage <em>and</em> raises AC. Kill foes to earn XP and Thrones (₮), scaled by floor. Return to Angel's Watch to shop. Level cap is 40; every 5 levels, gain +1 to a random stat.</p></div>
-        <div class="card"><h2>Dice</h2><p>Attacks: <code>d20 + POW + 2</code> vs DEF; crit on 20. Damage scales with <strong>Power</strong>. <strong>Will</strong> boosts Pray healing. <strong>Armor</strong> reduces incoming damage and increases AC.</p></div>
+        <div class="card">
+          <h2>How to play</h2>
+          <p>Pick a class and chapter/order/regiment, then push room by room. Encounters are combat, tests, or brief rests. Each combat round has a chance for a random twist (1 in 6). Medkits are rare but fully heal. Armor reduces damage <em>and</em> raises AC. Kill foes to earn XP and Thrones (₮), scaled by floor. Return to Angel's Watch to shop. Level cap is 40; every 5 levels, gain +1 to a random stat.</p>
+        </div>
+        <div class="card">
+          <h2>Dice</h2>
+          <p>Attacks: <code>d20 + POW + 2</code> vs DEF; crit on 20. Damage scales with <strong>Power</strong>. <strong>Will</strong> boosts Pray healing. <strong>Armor</strong> reduces incoming damage and increases AC.</p>
+        </div>
+        <!-- Project Links (explicit) -->
+        <div class="card">
+          <h2>Project Links</h2>
+          <p class="lead">Hosted on GitHub Pages with source code publicly available.</p>
+          <p>
+            <a class="pill" href="https://tommylenot.github.io/CS-39AF-Lenot/" target="_blank" rel="noopener">🌐 Live SPA (GitHub Pages)</a>
+            <a class="pill" href="https://github.com/TommyLenot/CS-39AF-Lenot" target="_blank" rel="noopener">📦 Repository (GitHub)</a>
+          </p>
+        </div>
       </div>
     </section>
 
@@ -179,7 +188,12 @@
     </section>
   </main>
 
-  <footer>Built with ❤️ using just HTML, CSS, and JavaScript. Fan-made prototype inspired by a grimdark setting.</footer>
+  <footer>
+    Built with ❤️ using just HTML, CSS, and JavaScript. Fan-made prototype inspired by a grimdark setting.
+    <br/>
+    <a class="pill" href="https://tommylenot.github.io/CS-39AF-Lenot/" target="_blank" rel="noopener">Live SPA</a>
+    <a class="pill" href="https://github.com/TommyLenot/CS-39AF-Lenot" target="_blank" rel="noopener">GitHub Repo</a>
+  </footer>
 
   <script>
   'use strict';
@@ -188,12 +202,35 @@
   const navLinks = Array.from(document.querySelectorAll('a[data-link]'));
   const app = document.getElementById('app');
   function setActiveLink(route){ navLinks.forEach(a=>{ const target=new URL(a.href).hash.slice(1)||'/'; a.setAttribute('aria-current', target===route?'page':'false'); }); }
-  function showRoute(route){ let found=false; routes.forEach(el=>{ const match=el.dataset.route===route; el.classList.toggle('active',match); if(match) found=true; }); if(!found){ route='/404'; routes.forEach(el=>el.classList.toggle('active', el.dataset.route===route)); } setActiveLink(route); app.focus({preventScroll:true}); if(route==='/game'){ UI.syncStats(); UI.setBest(Store.best()); } if(route==='/hub'){ Hub.sync(); } }
+  function showRoute(route){
+    let found=false;
+    routes.forEach(el=>{ const match=el.dataset.route===route; el.classList.toggle('active',match); if(match) found=true; });
+    if(!found){ route='/404'; routes.forEach(el=>el.classList.toggle('active', el.dataset.route===route)); }
+    setActiveLink(route);
+    app.focus({preventScroll:true});
+    if(route==='/game'){ UI.syncStats(); UI.setBest(Store.best()); }
+    if(route==='/hub'){ Hub.sync(); }
+  }
   function getHash(){ const raw=location.hash.slice(1); return raw&&raw.startsWith('/')?raw:'/'; }
-  addEventListener('hashchange',()=>showRoute(getHash())); addEventListener('load',()=>{ initNewRunUI(); showRoute(getHash()); });
+  addEventListener('hashchange',()=>showRoute(getHash()));
+  addEventListener('load',()=>{
+    initNewRunUI();
+    showRoute(getHash());
+    // Ensure "▶ New Run" routes reliably on first click in all browsers
+    const newRunLink = document.getElementById('newRunLink');
+    if(newRunLink){
+      newRunLink.addEventListener('click', ()=>{ location.hash = '#/game'; });
+    }
+  });
 
   // ----------------- Utilities -----------------
-  const RNG = (()=>{ let s = 0x2F6E2B1; function seed(x){ s = x>>>0 || (Math.random()*1e9)|0; } function next(){ s ^= s << 13; s ^= s >>> 17; s ^= s << 5; return (s>>>0)/4294967296; } function rollDie(sides){ return (next()*sides|0)+1; } function roll(expr){ const m = /^(\d+)d(\d+)([+-]\d+)?$/.exec(expr.trim()); if(!m) return 0; const n=+m[1], d=+m[2], k=m[3]?+m[3]:0; let t=0; for(let i=0;i<n;i++) t+=rollDie(d); return t+k; } return { seed, next, rollDie, roll };})();
+  const RNG = (()=>{ let s = 0x2F6E2B1;
+    function seed(x){ s = x>>>0 || (Math.random()*1e9)|0; }
+    function next(){ s ^= s << 13; s ^= s >>> 17; s ^= s << 5; return (s>>>0)/4294967296; }
+    function rollDie(sides){ return (next()*sides|0)+1; }
+    function roll(expr){ const m = /^(\d+)d(\d+)([+-]\d+)?$/.exec(expr.trim()); if(!m) return 0; const n=+m[1], d=+m[2], k=m[3]?+m[3]:0; let t=0; for(let i=0;i<n;i++) t+=rollDie(d); return t+k; }
+    return { seed, next, rollDie, roll };
+  })();
   function clamp(x,a,b){ return Math.max(a, Math.min(b,x)); }
   function pick(arr){ return arr[(RNG.next()*arr.length)|0]; }
   function hashString(str){ let h=2166136261>>>0; for(let i=0;i<str.length;i++){ h^=str.charCodeAt(i); h=(h*16777619)>>>0; } return h; }
@@ -244,12 +281,21 @@
   };
 
   // ----------------- UI Helpers -----------------
-  const UI = (()=>{ const hp=gid('hp'), armor=gid('armor'), kits=gid('kits'), nades=gid('nades'); const room=gid('room'), floor=gid('floor'), log=gid('log'), actions=gid('actions'); const best=gid('best'), will=gid('will'), pow=gid('pow'), lvl=gid('lvl'), xp=gid('xp'), money=gid('money');
+  const UI = (()=>{
+    const hp=gid('hp'), armor=gid('armor'), kits=gid('kits'), nades=gid('nades');
+    const room=gid('room'), floor=gid('floor'), log=gid('log'), actions=gid('actions');
+    const best=gid('best'), will=gid('will'), pow=gid('pow'), lvl=gid('lvl'), xp=gid('xp'), money=gid('money');
     function clearActions(){ actions.innerHTML=''; }
     function addAction(label, on){ const b=document.createElement('button'); b.className='btn'; b.textContent=label; b.addEventListener('click', on); actions.appendChild(b); return b; }
     function write(html){ const p=document.createElement('p'); p.innerHTML=html; log.appendChild(p); log.scrollTop=log.scrollHeight; }
     function resetLog(){ log.innerHTML=''; }
-    function syncStats(){ if(!Game.s) return; const s=Game.s; hp.textContent=`${s.hp}/${s.maxHp}`; armor.textContent=s.armor; kits.textContent=s.kits; nades.textContent=s.nades; floor.textContent=s.floor; room.textContent=`${s.room}/10`; will.textContent=s.will; pow.textContent=s.pow; lvl.textContent=s.lvl; xp.textContent=`${s.exp}/${xpToNext(s.lvl)}`; money.textContent=s.money; }
+    function syncStats(){
+      if(!Game.s) return;
+      const s=Game.s;
+      hp.textContent=`${s.hp}/${s.maxHp}`; armor.textContent=s.armor; kits.textContent=s.kits; nades.textContent=s.nades;
+      floor.textContent=s.floor; room.textContent=`${s.room}/10`; will.textContent=s.will; pow.textContent=s.pow;
+      lvl.textContent=s.lvl; xp.textContent=`${s.exp}/${xpToNext(s.lvl)}`; money.textContent=s.money;
+    }
     function setBest(n){ best.textContent=n; }
     return { clearActions, addAction, write, resetLog, syncStats, setBest };
   })();
@@ -275,6 +321,7 @@
     nextEncounter(){
       const s=this.s; if(s.dead) return;
       UI.clearActions();
+      // Boss every 10th room
       if(s.room===10){
         const bossTpl = (s.floor===10? CHAOS_LORD : pick(BOSSES));
         const boss = scaleEnemy(bossTpl, s.floor, true);
@@ -359,20 +406,19 @@
     function playerAttack(kind, idx){
       const f = living()[idx]; if(!f) return;
       const tag = kind==='shoot'? 'bolt fire':'blade';
-      const d20a = RNG.rollDie(20); const d20b = RNG.rollDie(20);
-      const roll = d20a; // keep simple: no advantage except from events handled separately
+      const d20a = RNG.rollDie(20);
       const mod = s.pow + 2;
-      const total = roll + mod;
-      if(roll===20){ let dmg= RNG.roll('1d8+2') + s.pow; if(f.defending) dmg=Math.floor(dmg*0.6); f.hp-=dmg; UI.write(`<span class='good'>CRIT! Your ${tag} deals ${dmg}. ${f.name} HP ${Math.max(f.hp,0)}</span>`); }
-      else if(roll===1){ UI.write(`<span class='bad'>Fumble—your ${tag} misses.</span>`); }
+      const total = d20a + mod;
+      if(d20a===20){ let dmg= RNG.roll('1d8+2') + s.pow; if(f.defending) dmg=Math.floor(dmg*0.6); f.hp-=dmg; UI.write(`<span class='good'>CRIT! Your ${tag} deals ${dmg}. ${f.name} HP ${Math.max(f.hp,0)}</span>`); }
+      else if(d20a===1){ UI.write(`<span class='bad'>Fumble—your ${tag} misses.</span>`); }
       else if(total>=f.def){ let dmg= RNG.roll('1d8+1') + s.pow; if(f.defending) dmg=Math.floor(dmg*0.6); f.hp-=dmg; UI.write(`<span class='good'>Hit for ${dmg}. ${f.name} HP ${Math.max(f.hp,0)}</span>`); }
-      else { UI.write(`Miss (rolled ${roll}+${mod} vs DEF ${f.def}).`); }
+      else { UI.write(`Miss (rolled ${d20a}+${mod} vs DEF ${f.def}).`); }
       postPlayer();
     }
 
     function postPlayer(){
-      for(const f of foes){ if(f.defending) f.defending=false; } // ends after they tank
-      // any kills -> rewards immediately
+      for(const f of foes){ if(f.defending) f.defending=false; } // defend lasts one player action
+      // rewards for any kills
       for(const f of foes){
         if(f.hp<=0 && !f._rewarded){
           const rewards = onKillRewards(Game.s.floor, boss);
@@ -519,7 +565,11 @@
     const arch = gid('arch'); const sub = gid('sub');
     function fillSub(){ const key = arch.value; sub.innerHTML=''; for(const s of SUBFACTIONS[key]){ const o=document.createElement('option'); o.value=s.id; o.textContent=s.name; sub.appendChild(o); } }
     arch.addEventListener('change', fillSub); fillSub();
-    gid('startBtn').addEventListener('click', ()=>{ const seed = gid('seed').value.trim(); Game.start(arch.value, sub.value, gid('diff').value, seed); });
+    // Start button = actually starts the run
+    gid('startBtn').addEventListener('click', ()=>{
+      const seed = gid('seed').value.trim();
+      Game.start(arch.value, sub.value, gid('diff').value, seed);
+    });
     gid('goHubBtn').addEventListener('click', ()=>{ location.hash = '#/hub'; });
   }
   </script>
