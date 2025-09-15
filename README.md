@@ -65,9 +65,9 @@ SPA Model: One HTML document; navigation via hash routes (#/, #/game, #/hub, #/c
 
 • Game balance: numbers are tuned for fun, not rigor—late floors can spike in difficulty
 
-• Can be slow/tedious
+• Cannot save current run, if you refresh, you restart.
 
-• Persistence: only best floor is saved; active runs aren’t persisted across reloads
+• Can be slow/tedious
 
 • Log growth: long sessions may produce tall logs (scrollable, but not paged)
 
