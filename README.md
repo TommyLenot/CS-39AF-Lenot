@@ -91,3 +91,4 @@ SPA Model: One HTML document; navigation via hash routes (#/, #/game, #/hub, #/c
 3. Read the log, choose actions, and advance room-by-room.
 4. On boss defeat, decide the shard’s fate.
 5. Reach Floor 10 and defeat the Chaos Lord for an ending based on your shard decisions.
+6. Please note that should you fail in your run, the button "New Run" does not work, simply hit start again to start an actual new run.
